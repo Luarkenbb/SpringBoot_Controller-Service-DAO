@@ -19,7 +19,7 @@ public class ResponseUtils {
 	public static <T> ResponseEntity<Map<String, Object>> successListResult(List list){
 		Map<String, Object> responseBody = new HashMap<>();
 		responseBody.put("status", Map.of("code", 0, "msg", "ok"));
-		if(list.size() != 0) {
+		if(list.size() != 0 && list != null) {
 			responseBody.put("payload", Map.of("data", list));
 		}else {
 			responseBody.put("payload", Map.of("data", null));
