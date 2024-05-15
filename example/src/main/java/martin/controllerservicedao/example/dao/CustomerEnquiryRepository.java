@@ -83,8 +83,10 @@ public class CustomerEnquiryRepository {
 					+ "    `salesRepEmployeeNumber`,"
 					+ "    `creditLimit`"
 					+ "FROM `customers` ");
+			/*-- Allowed Searching Criteria --*/
+			/**/
 			/*-- WHERE SQL--*/
-			
+			//todo
 			
 			
 			
