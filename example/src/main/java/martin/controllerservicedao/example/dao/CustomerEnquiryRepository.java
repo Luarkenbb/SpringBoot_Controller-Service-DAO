@@ -23,7 +23,7 @@ public class CustomerEnquiryRepository {
 	private EntityManager entityManager;
 	
 	public CustomerDetailsVO getCustomerDetailsByPK(CustomerDetailsBaseRequest request) {
-		logger.info("getCustomerDetail start");
+		logger.info("getCustomerDetailsByPK start");
 		CustomerDetailsVO vo = new CustomerDetailsVO();
 		
 		List<CustomerDetailsVO> list = new ArrayList();
@@ -59,7 +59,41 @@ public class CustomerEnquiryRepository {
 		}
 		
 		
-		logger.info("getCustomerDetail end");
+		logger.info("getCustomerDetailsByPK end");
 		return vo;
+	}
+	
+	
+	public List<CustomerDetailsVO> getCustomerDetails(CustomerDetailsBaseRequest request) {
+		logger.info("getCustomerDetails start");
+		List<CustomerDetailsVO> list = new ArrayList();
+		try {
+			/*--SELECT SQL--*/
+			StringBuffer select_from_sql = new StringBuffer("SELECT `customerNumber`,"
+					+ "    `customerName`,"
+					+ "    `contactLastName`,"
+					+ "    `contactFirstName`,"
+					+ "    `phone`,"
+					+ "    `addressLine1`,"
+					+ "    `addressLine2`,"
+					+ "    `city`,"
+					+ "    `state`,"
+					+ "    `postalCode`,"
+					+ "    `country`,"
+					+ "    `salesRepEmployeeNumber`,"
+					+ "    `creditLimit`"
+					+ "FROM `customers` ");
+			/*-- WHERE SQL--*/
+			
+			
+			
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+			logger.error(e.getMessage());
+		}
+		
+		logger.info("getCustomerDetails end");
+		return null;
 	}
 }

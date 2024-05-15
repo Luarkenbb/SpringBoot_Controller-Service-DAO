@@ -1,5 +1,7 @@
 package martin.controllerservicedao.example.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
@@ -25,20 +27,38 @@ public class CustomerController {
 	@Autowired
 	private CustomerService customerService;
 	
-	@PostMapping("/get-customer-detail")
-	public ResponseEntity<Map<String, Object>> getCustomerDetail(@RequestBody CustomerDetailsBaseRequest request){
-		logger.info("get-customer-detail start");
+	@PostMapping("/get-customer-details-by-PK")
+	public ResponseEntity<Map<String, Object>> getCustomerDetailsByPK(@RequestBody CustomerDetailsBaseRequest request){
+		logger.info("get-customer-details-by-PK start");
 		CustomerDetailsBaseResponse response;
 		
 		try {
-			 response = customerService.getCustomerDetails(request);
+			 response = customerService.getCustomerDetailsByPK(request);
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.error(e.getMessage());
 			return null;
 		}
 		
-		logger.info("get-customer-detail end");
+		logger.info("get-customer-details-by-PK end");
 		return ResponseUtils.successSingleResult(response);
-	}	
+	}
+	
+	@PostMapping("/get-customer-details")
+	public ResponseEntity<Map<String, Object>> getCustomerDetails(@RequestBody CustomerDetailsBaseRequest request){
+		logger.info("get-customer-details start");
+		List<CustomerDetailsBaseResponse> response;
+		
+		try {
+			response = customerService.getCustomerDetails(request);
+		}catch (Exception e) {
+			e.printStackTrace();
+			logger.error(e.getMessage());
+			return null;
+		}
+		
+		logger.info("get-customer-details end");
+		return ResponseUtils.successListResult(response);
+	}
+	
 }

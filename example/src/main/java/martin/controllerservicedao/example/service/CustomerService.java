@@ -1,5 +1,8 @@
 package martin.controllerservicedao.example.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
@@ -19,13 +22,12 @@ public class CustomerService {
 		this.customerEnquiryRepository = customerEnquiryRepository;
 	}
 	
-	public CustomerDetailsBaseResponse getCustomerDetails(CustomerDetailsBaseRequest request) throws Exception{
-		logger.info("start");
+	public CustomerDetailsBaseResponse getCustomerDetailsByPK(CustomerDetailsBaseRequest request) throws Exception{
+		logger.info("getCustomerDetailsByPK start");
 		CustomerDetailsBaseResponse response;
 		
 		try {
 			CustomerDetailsVO vo = customerEnquiryRepository.getCustomerDetailsByPK(request);
-			
 			if(vo != null) {
 				response = new CustomerDetailsBaseResponse();
 				
@@ -52,7 +54,23 @@ public class CustomerService {
 			throw e;
 		}
 		
-		logger.info("end");
+		logger.info("getCustomerDetailsByPK end");
+		return response;
+	}
+	
+	public List<CustomerDetailsBaseResponse> getCustomerDetails(CustomerDetailsBaseRequest request) throws Exception{
+		logger.info("getCustomerDetails start");
+		List<CustomerDetailsBaseResponse> response = new ArrayList<CustomerDetailsBaseResponse>();
+		
+		try {
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+			logger.error(e.getMessage());
+			throw e;
+		}
+		
+		logger.info("getCustomerDetails end");
 		return response;
 	}
 }
