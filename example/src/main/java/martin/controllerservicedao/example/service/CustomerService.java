@@ -21,23 +21,30 @@ public class CustomerService {
 	
 	public CustomerGetCustomerDetailResponse getCustomerDetails(CustomerGetCustomerDetailRequest request) throws Exception{
 		logger.info("start");
-		CustomerGetCustomerDetailResponse response = new CustomerGetCustomerDetailResponse();
+		CustomerGetCustomerDetailResponse response;
 		
 		try {
 			CustomerDetailVO vo = customerEnquiryRepository.getCustomerDetail(request);
-			response.setAddressLine1(vo.getAddressLine1());
-			response.setAddressLine2(vo.getAddressLine2());
-			response.setCity(vo.getCity());
-			response.setContactFirstName(vo.getContactFirstName());
-			response.setContactLastName(vo.getContactLastName());
-			response.setCountry(vo.getCountry());
-			response.setCreditLimit(vo.getCreditLimit());
-			response.setCustomerName(vo.getCustomerName());
-			response.setCustomerNumber(vo.getCustomerNumber());
-			response.setPhone(vo.getPhone());
-			response.setPostalCode(vo.getPostalCode());
-			response.setSalesRepEmployeeNumber(vo.getSalesRepEmployeeNumber());
-			response.setState(vo.getState());
+			
+			if(vo != null) {
+				response = new CustomerGetCustomerDetailResponse();
+				
+				response.setAddressLine1(vo.getAddressLine1());
+				response.setAddressLine2(vo.getAddressLine2());
+				response.setCity(vo.getCity());
+				response.setContactFirstName(vo.getContactFirstName());
+				response.setContactLastName(vo.getContactLastName());
+				response.setCountry(vo.getCountry());
+				response.setCreditLimit(vo.getCreditLimit());
+				response.setCustomerName(vo.getCustomerName());
+				response.setCustomerNumber(vo.getCustomerNumber());
+				response.setPhone(vo.getPhone());
+				response.setPostalCode(vo.getPostalCode());
+				response.setSalesRepEmployeeNumber(vo.getSalesRepEmployeeNumber());
+				response.setState(vo.getState());
+			}else {
+				response = null;
+			}
 			
 		}catch (Exception e) {
 			e.printStackTrace();

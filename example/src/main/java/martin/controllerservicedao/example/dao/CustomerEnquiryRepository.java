@@ -48,8 +48,11 @@ public class CustomerEnquiryRepository {
 				query.setParameter(1, request.getCustomerNumber());
 			}
 			list = query.getResultList();
-			vo = list.get(0);
-			
+			if(list.size() == 0) {
+				vo = null;
+			}else {
+				vo = list.get(0);
+			}
 		}catch (Exception e) {
 			e.printStackTrace();
 			logger.error(e.getMessage());
