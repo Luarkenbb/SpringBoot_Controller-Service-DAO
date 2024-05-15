@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import martin.controllerservicedao.example.model.request.CustomerDetailsBaseRequest;
+import martin.controllerservicedao.example.model.request.CustomerGetDetailsByPKRequest;
+import martin.controllerservicedao.example.model.request.CustomerGetDetailsRequest;
 import martin.controllerservicedao.example.model.response.CustomerDetailsBaseResponse;
 import martin.controllerservicedao.example.service.CustomerService;
 import martin.controllerservicedao.example.utils.ResponseUtils;
@@ -28,7 +29,7 @@ public class CustomerController {
 	private CustomerService customerService;
 	
 	@PostMapping("/get-customer-details-by-PK")
-	public ResponseEntity<Map<String, Object>> getCustomerDetailsByPK(@RequestBody CustomerDetailsBaseRequest request){
+	public ResponseEntity<Map<String, Object>> getCustomerDetailsByPK(@RequestBody CustomerGetDetailsByPKRequest request){
 		logger.info("get-customer-details-by-PK start");
 		CustomerDetailsBaseResponse response;
 		
@@ -45,7 +46,7 @@ public class CustomerController {
 	}
 	
 	@PostMapping("/get-customer-details")
-	public ResponseEntity<Map<String, Object>> getCustomerDetails(@RequestBody CustomerDetailsBaseRequest request){
+	public ResponseEntity<Map<String, Object>> getCustomerDetails(@RequestBody CustomerGetDetailsRequest request){
 		logger.info("get-customer-details start");
 		List<CustomerDetailsBaseResponse> response;
 		

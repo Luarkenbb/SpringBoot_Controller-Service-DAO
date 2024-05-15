@@ -9,7 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import martin.controllerservicedao.example.dao.CustomerEnquiryRepository;
-import martin.controllerservicedao.example.model.request.CustomerDetailsBaseRequest;
+import martin.controllerservicedao.example.model.request.CustomerGetDetailsByPKRequest;
+import martin.controllerservicedao.example.model.request.CustomerGetDetailsRequest;
 import martin.controllerservicedao.example.model.response.CustomerDetailsBaseResponse;
 import martin.controllerservicedao.example.model.vo.CustomerDetailsVO;
 
@@ -24,7 +25,7 @@ public class CustomerService {
 		this.customerEnquiryRepository = customerEnquiryRepository;
 	}
 	
-	public CustomerDetailsBaseResponse getCustomerDetailsByPK(CustomerDetailsBaseRequest request) throws Exception{
+	public CustomerDetailsBaseResponse getCustomerDetailsByPK(CustomerGetDetailsByPKRequest request) throws Exception{
 		logger.info("getCustomerDetailsByPK start");
 		CustomerDetailsBaseResponse response;
 		
@@ -60,7 +61,7 @@ public class CustomerService {
 		return response;
 	}
 	
-	public List<CustomerDetailsBaseResponse> getCustomerDetails(CustomerDetailsBaseRequest request) throws Exception{
+	public List<CustomerDetailsBaseResponse> getCustomerDetails(CustomerGetDetailsRequest request) throws Exception{
 		logger.info("getCustomerDetails start");
 		List<CustomerDetailsBaseResponse> response = new ArrayList<CustomerDetailsBaseResponse>();
 		

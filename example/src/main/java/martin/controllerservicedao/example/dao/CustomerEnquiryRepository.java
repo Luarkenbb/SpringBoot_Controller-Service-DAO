@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import io.micrometer.common.util.StringUtils;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
-import martin.controllerservicedao.example.model.request.CustomerDetailsBaseRequest;
+import martin.controllerservicedao.example.model.request.CustomerGetDetailsByPKRequest;
 import martin.controllerservicedao.example.model.vo.CustomerDetailsVO;
 
 @Repository
@@ -22,7 +22,7 @@ public class CustomerEnquiryRepository {
 	@Autowired
 	private EntityManager entityManager;
 	
-	public CustomerDetailsVO getCustomerDetailsByPK(CustomerDetailsBaseRequest request) {
+	public CustomerDetailsVO getCustomerDetailsByPK(CustomerGetDetailsByPKRequest request) {
 		logger.info("getCustomerDetailsByPK start");
 		CustomerDetailsVO vo = new CustomerDetailsVO();
 		
@@ -64,7 +64,7 @@ public class CustomerEnquiryRepository {
 	}
 	
 	
-	public List<CustomerDetailsVO> getCustomerDetails(CustomerDetailsBaseRequest request) {
+	public List<CustomerDetailsVO> getCustomerDetails(CustomerGetDetailsByPKRequest request) {
 		logger.info("getCustomerDetails start");
 		List<CustomerDetailsVO> list = new ArrayList();
 		try {
