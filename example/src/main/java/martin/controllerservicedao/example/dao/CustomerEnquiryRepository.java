@@ -50,7 +50,6 @@ public class CustomerEnquiryRepository {
 			list = query.getResultList();
 			vo = list.get(0);
 			
-			
 		}catch (Exception e) {
 			e.printStackTrace();
 			logger.error(e.getMessage());

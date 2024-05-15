@@ -39,14 +39,11 @@ public class CustomerService {
 			response.setSalesRepEmployeeNumber(vo.getSalesRepEmployeeNumber());
 			response.setState(vo.getState());
 			
-			
 		}catch (Exception e) {
 			e.printStackTrace();
 			logger.error(e.getMessage());
 			throw e;
 		}
-		
-		
 		
 		logger.info("end");
 		return response;

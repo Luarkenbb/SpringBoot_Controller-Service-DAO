@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import martin.controllerservicedao.example.model.request.CustomerGetCustomerDetailRequest;
 import martin.controllerservicedao.example.model.response.CustomerGetCustomerDetailResponse;
 import martin.controllerservicedao.example.service.CustomerService;
+import martin.controllerservicedao.example.utils.ResponseUtils;
 
 @RestController
 @RequestMapping("/customer")
@@ -27,15 +28,10 @@ public class CustomerController {
 	@PostMapping("/get-customer-detail")
 	public ResponseEntity<Map<String, Object>> getCustomerDetail(@RequestBody CustomerGetCustomerDetailRequest request){
 		logger.info("get-customer-detail start");
-		ResponseEntity<Map<String, Object>> entity;
-		
+		CustomerGetCustomerDetailResponse response;
 		
 		try {
-			CustomerGetCustomerDetailResponse response = customerService.getCustomerDetails(request);
-			entity = new ResponseEntity<Map<String, Object>>(HttpStatus.OK);
-			//todo: create custom ResponseEntity object and add response inside.
-			
-			
+			 response = customerService.getCustomerDetails(request);
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.error(e.getMessage());
@@ -43,7 +39,6 @@ public class CustomerController {
 		}
 		
 		logger.info("get-customer-detail end");
-		return entity;
-	}
-	
+		return ResponseUtils.successSingleResult(response);
+	}	
 }
