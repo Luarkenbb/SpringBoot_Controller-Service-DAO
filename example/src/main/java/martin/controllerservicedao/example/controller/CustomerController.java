@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import martin.controllerservicedao.example.model.request.CustomerGetCustomerDetailRequest;
-import martin.controllerservicedao.example.model.response.CustomerGetCustomerDetailResponse;
+import martin.controllerservicedao.example.model.request.CustomerDetailsBaseRequest;
+import martin.controllerservicedao.example.model.response.CustomerDetailsBaseResponse;
 import martin.controllerservicedao.example.service.CustomerService;
 import martin.controllerservicedao.example.utils.ResponseUtils;
 
@@ -26,9 +26,9 @@ public class CustomerController {
 	private CustomerService customerService;
 	
 	@PostMapping("/get-customer-detail")
-	public ResponseEntity<Map<String, Object>> getCustomerDetail(@RequestBody CustomerGetCustomerDetailRequest request){
+	public ResponseEntity<Map<String, Object>> getCustomerDetail(@RequestBody CustomerDetailsBaseRequest request){
 		logger.info("get-customer-detail start");
-		CustomerGetCustomerDetailResponse response;
+		CustomerDetailsBaseResponse response;
 		
 		try {
 			 response = customerService.getCustomerDetails(request);

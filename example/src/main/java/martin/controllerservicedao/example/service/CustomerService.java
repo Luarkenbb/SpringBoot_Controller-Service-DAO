@@ -5,9 +5,9 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import martin.controllerservicedao.example.dao.CustomerEnquiryRepository;
-import martin.controllerservicedao.example.model.request.CustomerGetCustomerDetailRequest;
-import martin.controllerservicedao.example.model.response.CustomerGetCustomerDetailResponse;
-import martin.controllerservicedao.example.model.vo.CustomerDetailVO;
+import martin.controllerservicedao.example.model.request.CustomerDetailsBaseRequest;
+import martin.controllerservicedao.example.model.response.CustomerDetailsBaseResponse;
+import martin.controllerservicedao.example.model.vo.CustomerDetailsVO;
 
 @Service
 public class CustomerService {
@@ -19,15 +19,15 @@ public class CustomerService {
 		this.customerEnquiryRepository = customerEnquiryRepository;
 	}
 	
-	public CustomerGetCustomerDetailResponse getCustomerDetails(CustomerGetCustomerDetailRequest request) throws Exception{
+	public CustomerDetailsBaseResponse getCustomerDetails(CustomerDetailsBaseRequest request) throws Exception{
 		logger.info("start");
-		CustomerGetCustomerDetailResponse response;
+		CustomerDetailsBaseResponse response;
 		
 		try {
-			CustomerDetailVO vo = customerEnquiryRepository.getCustomerDetail(request);
+			CustomerDetailsVO vo = customerEnquiryRepository.getCustomerDetailsByPK(request);
 			
 			if(vo != null) {
-				response = new CustomerGetCustomerDetailResponse();
+				response = new CustomerDetailsBaseResponse();
 				
 				response.setAddressLine1(vo.getAddressLine1());
 				response.setAddressLine2(vo.getAddressLine2());

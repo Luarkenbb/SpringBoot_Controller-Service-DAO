@@ -12,8 +12,8 @@ import org.springframework.stereotype.Repository;
 import io.micrometer.common.util.StringUtils;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
-import martin.controllerservicedao.example.model.request.CustomerGetCustomerDetailRequest;
-import martin.controllerservicedao.example.model.vo.CustomerDetailVO;
+import martin.controllerservicedao.example.model.request.CustomerDetailsBaseRequest;
+import martin.controllerservicedao.example.model.vo.CustomerDetailsVO;
 
 @Repository
 public class CustomerEnquiryRepository {
@@ -22,11 +22,11 @@ public class CustomerEnquiryRepository {
 	@Autowired
 	private EntityManager entityManager;
 	
-	public CustomerDetailVO getCustomerDetail(CustomerGetCustomerDetailRequest request) {
+	public CustomerDetailsVO getCustomerDetailsByPK(CustomerDetailsBaseRequest request) {
 		logger.info("getCustomerDetail start");
-		CustomerDetailVO vo = new CustomerDetailVO();
+		CustomerDetailsVO vo = new CustomerDetailsVO();
 		
-		List<CustomerDetailVO> list = new ArrayList();
+		List<CustomerDetailsVO> list = new ArrayList();
 		try {
 			StringBuffer sql = new StringBuffer("SELECT `customerNumber`,"
 					+ "    `customerName`,"
@@ -42,10 +42,10 @@ public class CustomerEnquiryRepository {
 					+ "    `salesRepEmployeeNumber`,"
 					+ "    `creditLimit`"
 					+ "FROM `customers` "
-					+ "WHERE `customerNumber` = ?");
-			Query query = entityManager.createNativeQuery(sql.toString(),CustomerDetailVO.class);
+					+ "WHERE `customerNumber` = :number");
+			Query query = entityManager.createNativeQuery(sql.toString(),CustomerDetailsVO.class);
 			if(request.getCustomerNumber() != 0) { //primitives dont have null value
-				query.setParameter(1, request.getCustomerNumber());
+				query.setParameter("number", request.getCustomerNumber());
 			}
 			list = query.getResultList();
 			if(list.size() == 0) {

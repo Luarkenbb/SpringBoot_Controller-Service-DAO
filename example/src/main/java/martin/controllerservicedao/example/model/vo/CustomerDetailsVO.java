@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 @Entity
-public class CustomerDetailVO {
+public class CustomerDetailsVO {
 	@Id
 	@Column(name = "customernumber")
 	private int customerNumber;

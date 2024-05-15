@@ -3,7 +3,7 @@ package martin.controllerservicedao.example.model.response;
 import lombok.Data;
 
 @Data
-public class CustomerGetCustomerDetailResponse {
+public class CustomerDetailsBaseResponse {
 	private int customerNumber;
 	private String customerName;
 	private String contactLastName;
