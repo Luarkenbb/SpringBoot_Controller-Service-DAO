@@ -15,6 +15,6 @@ public class CustomerDetailsBaseResponse {
 	private String state;
 	private String postalCode;
 	private String country;
-	private int salesRepEmployeeNumber;
+	private String salesRepEmployeeNumber;
 	private double creditLimit;
 }

@@ -43,7 +43,7 @@ public class CustomerDetailsVO {
 	private String country;
 	
 	@Column(name = "salesrepemployeenumber")
-	private int salesRepEmployeeNumber;
+	private String salesRepEmployeeNumber;
 	
 	@Column(name = "creditlimit")
 	private double creditLimit;

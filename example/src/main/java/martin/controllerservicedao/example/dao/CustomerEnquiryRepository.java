@@ -13,6 +13,7 @@ import io.micrometer.common.util.StringUtils;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import martin.controllerservicedao.example.model.request.CustomerGetDetailsByPKRequest;
+import martin.controllerservicedao.example.model.request.CustomerGetDetailsRequest;
 import martin.controllerservicedao.example.model.vo.CustomerDetailsVO;
 
 @Repository
@@ -40,7 +41,7 @@ public class CustomerEnquiryRepository {
 					+ "    `postalCode`,"
 					+ "    `country`,"
 					+ "    `salesRepEmployeeNumber`,"
-					+ "    `creditLimit`"
+					+ "    `creditLimit` "
 					+ "FROM `customers` "
 					+ "WHERE `customerNumber` = :number");
 			Query query = entityManager.createNativeQuery(sql.toString(),CustomerDetailsVO.class);
@@ -64,10 +65,59 @@ public class CustomerEnquiryRepository {
 	}
 	
 	
-	public List<CustomerDetailsVO> getCustomerDetails(CustomerGetDetailsByPKRequest request) {
+	public List<CustomerDetailsVO> getCustomerDetails(CustomerGetDetailsRequest request) {
 		logger.info("getCustomerDetails start");
 		List<CustomerDetailsVO> list = new ArrayList();
 		try {
+			/*-- Check Searching Criteria --*/
+			boolean isCustomerNameExist, isContactLastNameExist, isContactFirstNameExist, isPhoneExist, isCityExist, isCountryExist, isCreditLimitExist;
+			if(StringUtils.isEmpty(request.getCustomerName())) {
+				isCustomerNameExist = false;}
+			else {
+				isCustomerNameExist = true;
+			}
+			
+			if(StringUtils.isEmpty(request.getContactLastName())) {
+				isContactLastNameExist = false;
+			}else {
+				isContactLastNameExist = true;
+			}
+			
+			if(StringUtils.isEmpty(request.getContactFirstName())) {
+				isContactFirstNameExist = false;
+			}else {
+				isContactFirstNameExist = true;
+			}
+			
+			if(StringUtils.isEmpty(request.getPhone())) {
+				isPhoneExist = false;
+			}else {
+				isPhoneExist = true;
+			}
+			
+			if(StringUtils.isEmpty(request.getCity())) {
+				isCityExist = false;
+			}else {
+				isCityExist = true;
+			}
+			
+			if(StringUtils.isEmpty(request.getCountry())) {
+				isCountryExist = false;
+			}else {
+				isCountryExist = true;
+			}
+			
+			if(request.getCreditLimit() == 0) {
+				isCreditLimitExist = false;
+			}else {
+				isCreditLimitExist = true;
+			}
+			
+			if(!isCustomerNameExist && !isContactLastNameExist && !isContactFirstNameExist && !isPhoneExist && !isCityExist && !isCountryExist && !isCreditLimitExist) {
+				logger.info("getCustomerDetails: no searching criteria");
+				return null;
+			}
+			/**/
 			/*--SELECT SQL--*/
 			StringBuffer select_from_sql = new StringBuffer("SELECT `customerNumber`,"
 					+ "    `customerName`,"
@@ -81,11 +131,84 @@ public class CustomerEnquiryRepository {
 					+ "    `postalCode`,"
 					+ "    `country`,"
 					+ "    `salesRepEmployeeNumber`,"
-					+ "    `creditLimit`"
+					+ "    `creditLimit` "
 					+ "FROM `customers` ");
-			/*-- Allowed Searching Criteria --*/
-			/**/
+			
 			/*-- WHERE SQL--*/
+			boolean isFirstCondition = true;
+			StringBuffer where_sql = new StringBuffer("");
+			
+			if(isCustomerNameExist) {
+				if(isFirstCondition) {
+					where_sql.append("WHERE ");
+					isFirstCondition = false;
+				}else {
+					where_sql.append("AND ");
+				}
+				where_sql.append("`customerName` LIKE :customer_name ");
+			}
+			
+			if(isContactLastNameExist) {
+				if(isFirstCondition) {
+					where_sql.append("WHERE ");
+					isFirstCondition = false;
+				}else {
+					where_sql.append("AND ");
+				}
+				where_sql.append("`contactLastName` LIKE :contact_last_name ");
+			}
+			
+			if(isContactFirstNameExist) {
+				if(isFirstCondition) {
+					where_sql.append("WHERE ");
+					isFirstCondition = false;
+				}else {
+					where_sql.append("AND ");
+				}
+				where_sql.append("`contactFirstName` LIKE :contact_first_name ");
+			}
+			
+			if(isPhoneExist) {
+				if(isFirstCondition) {
+					where_sql.append("WHERE ");
+					isFirstCondition = false;
+				}else {
+					where_sql.append("AND ");
+				}
+				where_sql.append("`phone` LIKE :phone ");
+			}
+			
+			if(isCityExist) {
+				if(isFirstCondition) {
+					where_sql.append("WHERE ");
+					isFirstCondition = false;
+				}else {
+					where_sql.append("AND ");
+				}
+				where_sql.append("`city` LIKE :city ");
+			}
+			
+			if(isCountryExist) {
+				if(isFirstCondition) {
+					where_sql.append("WHERE ");
+					isFirstCondition = false;
+				}else {
+					where_sql.append("AND ");
+				}
+				where_sql.append("`country` LIKE :country ");
+			}
+			
+			select_from_sql.append(where_sql);
+			Query query = entityManager.createNativeQuery(select_from_sql.toString(),CustomerDetailsVO.class);
+			if(isCustomerNameExist) {query.setParameter("customer_name", "%" + request.getCustomerName() + "%");}
+			if(isContactLastNameExist) {query.setParameter("contact_last_name", "%" + request.getContactLastName() + "%");}
+			if(isContactFirstNameExist) {query.setParameter("contact_first_name", "%" + request.getContactFirstName() + "%");}
+			if(isPhoneExist) {query.setParameter("phone", "%" + request.getPhone() + "%");}
+			if(isCityExist) {query.setParameter("city", "%" + request.getCity() + "%");}
+			if(isCountryExist) {query.setParameter("country", "%" + request.getCountry() + "%");}
+			
+			list = query.getResultList();
+			logger.info("getCustomerDetails count" + list.size());
 			//todo
 			
 			
@@ -93,9 +216,10 @@ public class CustomerEnquiryRepository {
 		}catch (Exception e) {
 			e.printStackTrace();
 			logger.error(e.getMessage());
+			return null;
 		}
 		
 		logger.info("getCustomerDetails end");
-		return null;
+		return list;
 	}
 }

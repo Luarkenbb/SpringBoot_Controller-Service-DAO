@@ -63,9 +63,31 @@ public class CustomerService {
 	
 	public List<CustomerDetailsBaseResponse> getCustomerDetails(CustomerGetDetailsRequest request) throws Exception{
 		logger.info("getCustomerDetails start");
-		List<CustomerDetailsBaseResponse> response = new ArrayList<CustomerDetailsBaseResponse>();
-		
+		List<CustomerDetailsBaseResponse> response_list = new ArrayList<CustomerDetailsBaseResponse>();
+		CustomerDetailsBaseResponse response;
 		try {
+			List<CustomerDetailsVO> vo_list = customerEnquiryRepository.getCustomerDetails(request);
+			if(vo_list != null && vo_list.size() != 0) {
+				for(CustomerDetailsVO vo : vo_list) {
+					response = new CustomerDetailsBaseResponse();
+					
+					response.setAddressLine1(vo.getAddressLine1());
+					response.setAddressLine2(vo.getAddressLine2());
+					response.setCity(vo.getCity());
+					response.setContactFirstName(vo.getContactFirstName());
+					response.setContactLastName(vo.getContactLastName());
+					response.setCountry(vo.getCountry());
+					response.setCreditLimit(vo.getCreditLimit());
+					response.setCustomerName(vo.getCustomerName());
+					response.setCustomerNumber(vo.getCustomerNumber());
+					response.setPhone(vo.getPhone());
+					response.setPostalCode(vo.getPostalCode());
+					response.setSalesRepEmployeeNumber(vo.getSalesRepEmployeeNumber());
+					response.setState(vo.getState());
+					
+					response_list.add(response);
+				}
+			}
 			
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -74,6 +96,6 @@ public class CustomerService {
 		}
 		
 		logger.info("getCustomerDetails end");
-		return response;
+		return response_list;
 	}
 }

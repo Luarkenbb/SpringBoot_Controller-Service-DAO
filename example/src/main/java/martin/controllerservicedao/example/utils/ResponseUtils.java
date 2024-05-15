@@ -22,7 +22,7 @@ public class ResponseUtils {
 		if(list.size() != 0 && list != null) {
 			responseBody.put("payload", Map.of("data", list));
 		}else {
-			responseBody.put("payload", Map.of("data", null));
+			responseBody.put("payload", Map.of("data", "nodata"));
 		}
 		
 		return ResponseEntity.status(HttpStatus.OK).body(responseBody);
