@@ -1,6 +1,7 @@
 package martin.controllerservicedao.example.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -138,78 +139,85 @@ public class CustomerEnquiryRepository {
 			boolean isFirstCondition = true;
 			StringBuffer where_sql = new StringBuffer("");
 			
-			if(isCustomerNameExist) {
-				if(isFirstCondition) {
-					where_sql.append("WHERE ");
-					isFirstCondition = false;
-				}else {
-					where_sql.append("AND ");
-				}
-				where_sql.append("`customerName` LIKE :customer_name ");
-			}
+			HashMap<String, HashMap<String, Object>> where_sql_map = new HashMap<>();
+			//CustomerName
+			HashMap<String, Object> customerName_map = new HashMap<>();
+			customerName_map.put("flag", isCustomerNameExist);
+			customerName_map.put("column", "`customerName`");
+			customerName_map.put("condition", " LIKE :customer_name ");
+			customerName_map.put("param", "customer_name");
+			customerName_map.put("value", request.getCustomerName());
+			where_sql_map.put("customerName", customerName_map);
+			//contactLastName
+			HashMap<String, Object> contactLastName_map = new HashMap<>();
+			contactLastName_map.put("flag", isContactLastNameExist);
+			contactLastName_map.put("column", "`contactLastName`");
+			contactLastName_map.put("condition", " LIKE :contact_last_name ");
+			contactLastName_map.put("param", "contact_last_name");
+			contactLastName_map.put("value", request.getContactLastName());
+			where_sql_map.put("contactLastName", contactLastName_map);
+			//contactFirstName
+			HashMap<String, Object> contactFirstName_map = new HashMap<>();
+			contactFirstName_map.put("flag", isContactFirstNameExist);
+			contactFirstName_map.put("column", "`contactFirstName`");
+			contactFirstName_map.put("condition", " LIKE :contact_first_name ");
+			contactFirstName_map.put("param", "contact_first_name");
+			contactFirstName_map.put("value", request.getContactFirstName());
+			where_sql_map.put("contactFirstName", contactFirstName_map);
+			//phone
+			HashMap<String, Object> phone_map = new HashMap<>();
+			phone_map.put("flag", isPhoneExist);
+			phone_map.put("column", "`phone`");
+			phone_map.put("condition", " LIKE :phone ");
+			phone_map.put("param", "phone");
+			phone_map.put("value", request.getPhone());
+			where_sql_map.put("phone", phone_map);
+			//city
+			HashMap<String, Object> city_map = new HashMap<>();
+			city_map.put("flag", isCityExist);
+			city_map.put("column", "`city`");
+			city_map.put("condition", " LIKE :city ");
+			city_map.put("param", "city");
+			city_map.put("value", request.getCity());
+			where_sql_map.put("city", city_map);
+			//country
+			HashMap<String, Object> country_map = new HashMap<>();
+			country_map.put("flag", isCountryExist);
+			country_map.put("column", "`country`");
+			country_map.put("condition", " LIKE :country ");
+			country_map.put("param", "country");
+			country_map.put("value", request.getCountry());
+			where_sql_map.put("country", country_map);
 			
-			if(isContactLastNameExist) {
-				if(isFirstCondition) {
-					where_sql.append("WHERE ");
-					isFirstCondition = false;
-				}else {
-					where_sql.append("AND ");
+			for(String key : where_sql_map.keySet()) {
+				HashMap<String, Object> key_map = where_sql_map.get(key);
+				
+				if((boolean)key_map.get("flag")) {
+					if(isFirstCondition) {
+						where_sql.append("WHERE ");
+						isFirstCondition = false;
+					}else {
+						where_sql.append("AND ");
+					}
+					where_sql.append((String)key_map.get("column") + (String)key_map.get("condition"));
+					
 				}
-				where_sql.append("`contactLastName` LIKE :contact_last_name ");
+				
 			}
-			
-			if(isContactFirstNameExist) {
-				if(isFirstCondition) {
-					where_sql.append("WHERE ");
-					isFirstCondition = false;
-				}else {
-					where_sql.append("AND ");
-				}
-				where_sql.append("`contactFirstName` LIKE :contact_first_name ");
-			}
-			
-			if(isPhoneExist) {
-				if(isFirstCondition) {
-					where_sql.append("WHERE ");
-					isFirstCondition = false;
-				}else {
-					where_sql.append("AND ");
-				}
-				where_sql.append("`phone` LIKE :phone ");
-			}
-			
-			if(isCityExist) {
-				if(isFirstCondition) {
-					where_sql.append("WHERE ");
-					isFirstCondition = false;
-				}else {
-					where_sql.append("AND ");
-				}
-				where_sql.append("`city` LIKE :city ");
-			}
-			
-			if(isCountryExist) {
-				if(isFirstCondition) {
-					where_sql.append("WHERE ");
-					isFirstCondition = false;
-				}else {
-					where_sql.append("AND ");
-				}
-				where_sql.append("`country` LIKE :country ");
-			}
-			
 			select_from_sql.append(where_sql);
 			Query query = entityManager.createNativeQuery(select_from_sql.toString(),CustomerDetailsVO.class);
-			if(isCustomerNameExist) {query.setParameter("customer_name", "%" + request.getCustomerName() + "%");}
-			if(isContactLastNameExist) {query.setParameter("contact_last_name", "%" + request.getContactLastName() + "%");}
-			if(isContactFirstNameExist) {query.setParameter("contact_first_name", "%" + request.getContactFirstName() + "%");}
-			if(isPhoneExist) {query.setParameter("phone", "%" + request.getPhone() + "%");}
-			if(isCityExist) {query.setParameter("city", "%" + request.getCity() + "%");}
-			if(isCountryExist) {query.setParameter("country", "%" + request.getCountry() + "%");}
+			
+			for(String key : where_sql_map.keySet()) {
+				HashMap<String, Object> key_map = where_sql_map.get(key);
+				
+				if((boolean)key_map.get("flag")) {
+					query.setParameter((String)key_map.get("param"), "%" + (String)key_map.get("value") + "%");
+				}
+			}
 			
 			list = query.getResultList();
 			logger.info("getCustomerDetails count" + list.size());
-			//todo
+			
 			
 			
 			
