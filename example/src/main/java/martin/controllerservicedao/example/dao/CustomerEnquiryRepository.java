@@ -96,7 +96,7 @@ public class CustomerEnquiryRepository {
 			HashMap<String, HashMap<String, Object>> where_sql_map = new HashMap<>();
 			//CustomerName
 			HashMap<String, Object> customerName_map = new HashMap<>();
-			customerName_map.put("flag", StringUtils.isEmpty(request.getCustomerName()) ? true : false );
+			customerName_map.put("flag", StringUtils.isEmpty(request.getCustomerName()) ? false : true );
 			customerName_map.put("column", "`customerName`");
 			customerName_map.put("condition", " LIKE :customer_name ");
 			customerName_map.put("param", "customer_name");
@@ -104,7 +104,7 @@ public class CustomerEnquiryRepository {
 			where_sql_map.put("customerName", customerName_map);
 			//contactLastName
 			HashMap<String, Object> contactLastName_map = new HashMap<>();
-			contactLastName_map.put("flag", StringUtils.isEmpty(request.getContactLastName()) ? true : false);
+			contactLastName_map.put("flag", StringUtils.isEmpty(request.getContactLastName()) ? false : true );
 			contactLastName_map.put("column", "`contactLastName`");
 			contactLastName_map.put("condition", " LIKE :contact_last_name ");
 			contactLastName_map.put("param", "contact_last_name");
@@ -112,7 +112,7 @@ public class CustomerEnquiryRepository {
 			where_sql_map.put("contactLastName", contactLastName_map);
 			//contactFirstName
 			HashMap<String, Object> contactFirstName_map = new HashMap<>();
-			contactFirstName_map.put("flag", StringUtils.isEmpty(request.getContactFirstName()) ? true : false);
+			contactFirstName_map.put("flag", StringUtils.isEmpty(request.getContactFirstName()) ? false : true );
 			contactFirstName_map.put("column", "`contactFirstName`");
 			contactFirstName_map.put("condition", " LIKE :contact_first_name ");
 			contactFirstName_map.put("param", "contact_first_name");
@@ -120,7 +120,7 @@ public class CustomerEnquiryRepository {
 			where_sql_map.put("contactFirstName", contactFirstName_map);
 			//phone
 			HashMap<String, Object> phone_map = new HashMap<>();
-			phone_map.put("flag", StringUtils.isEmpty(request.getPhone()) ? true : false);
+			phone_map.put("flag", StringUtils.isEmpty(request.getPhone()) ? false : true );
 			phone_map.put("column", "`phone`");
 			phone_map.put("condition", " LIKE :phone ");
 			phone_map.put("param", "phone");
@@ -128,7 +128,7 @@ public class CustomerEnquiryRepository {
 			where_sql_map.put("phone", phone_map);
 			//city
 			HashMap<String, Object> city_map = new HashMap<>();
-			city_map.put("flag", StringUtils.isEmpty(request.getCity()) ? true : false);
+			city_map.put("flag", StringUtils.isEmpty(request.getCity()) ? false : true );
 			city_map.put("column", "`city`");
 			city_map.put("condition", " LIKE :city ");
 			city_map.put("param", "city");
@@ -136,7 +136,7 @@ public class CustomerEnquiryRepository {
 			where_sql_map.put("city", city_map);
 			//country
 			HashMap<String, Object> country_map = new HashMap<>();
-			country_map.put("flag", StringUtils.isEmpty(request.getCountry()) ? true : false);
+			country_map.put("flag", StringUtils.isEmpty(request.getCountry()) ? false : true );
 			country_map.put("column", "`country`");
 			country_map.put("condition", " LIKE :country ");
 			country_map.put("param", "country");
