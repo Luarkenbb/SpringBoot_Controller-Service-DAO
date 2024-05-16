@@ -71,53 +71,7 @@ public class CustomerEnquiryRepository {
 		List<CustomerDetailsVO> list = new ArrayList();
 		try {
 			/*-- Check Searching Criteria --*/
-			boolean isCustomerNameExist, isContactLastNameExist, isContactFirstNameExist, isPhoneExist, isCityExist, isCountryExist, isCreditLimitExist;
-			if(StringUtils.isEmpty(request.getCustomerName())) {
-				isCustomerNameExist = false;}
-			else {
-				isCustomerNameExist = true;
-			}
 			
-			if(StringUtils.isEmpty(request.getContactLastName())) {
-				isContactLastNameExist = false;
-			}else {
-				isContactLastNameExist = true;
-			}
-			
-			if(StringUtils.isEmpty(request.getContactFirstName())) {
-				isContactFirstNameExist = false;
-			}else {
-				isContactFirstNameExist = true;
-			}
-			
-			if(StringUtils.isEmpty(request.getPhone())) {
-				isPhoneExist = false;
-			}else {
-				isPhoneExist = true;
-			}
-			
-			if(StringUtils.isEmpty(request.getCity())) {
-				isCityExist = false;
-			}else {
-				isCityExist = true;
-			}
-			
-			if(StringUtils.isEmpty(request.getCountry())) {
-				isCountryExist = false;
-			}else {
-				isCountryExist = true;
-			}
-			
-			if(request.getCreditLimit() == 0) {
-				isCreditLimitExist = false;
-			}else {
-				isCreditLimitExist = true;
-			}
-			
-			if(!isCustomerNameExist && !isContactLastNameExist && !isContactFirstNameExist && !isPhoneExist && !isCityExist && !isCountryExist && !isCreditLimitExist) {
-				logger.info("getCustomerDetails: no searching criteria");
-				return null;
-			}
 			/**/
 			/*--SELECT SQL--*/
 			StringBuffer select_from_sql = new StringBuffer("SELECT `customerNumber`,"
@@ -142,7 +96,7 @@ public class CustomerEnquiryRepository {
 			HashMap<String, HashMap<String, Object>> where_sql_map = new HashMap<>();
 			//CustomerName
 			HashMap<String, Object> customerName_map = new HashMap<>();
-			customerName_map.put("flag", isCustomerNameExist);
+			customerName_map.put("flag", StringUtils.isEmpty(request.getCustomerName()) ? true : false );
 			customerName_map.put("column", "`customerName`");
 			customerName_map.put("condition", " LIKE :customer_name ");
 			customerName_map.put("param", "customer_name");
@@ -150,7 +104,7 @@ public class CustomerEnquiryRepository {
 			where_sql_map.put("customerName", customerName_map);
 			//contactLastName
 			HashMap<String, Object> contactLastName_map = new HashMap<>();
-			contactLastName_map.put("flag", isContactLastNameExist);
+			contactLastName_map.put("flag", StringUtils.isEmpty(request.getContactLastName()) ? true : false);
 			contactLastName_map.put("column", "`contactLastName`");
 			contactLastName_map.put("condition", " LIKE :contact_last_name ");
 			contactLastName_map.put("param", "contact_last_name");
@@ -158,7 +112,7 @@ public class CustomerEnquiryRepository {
 			where_sql_map.put("contactLastName", contactLastName_map);
 			//contactFirstName
 			HashMap<String, Object> contactFirstName_map = new HashMap<>();
-			contactFirstName_map.put("flag", isContactFirstNameExist);
+			contactFirstName_map.put("flag", StringUtils.isEmpty(request.getContactFirstName()) ? true : false);
 			contactFirstName_map.put("column", "`contactFirstName`");
 			contactFirstName_map.put("condition", " LIKE :contact_first_name ");
 			contactFirstName_map.put("param", "contact_first_name");
@@ -166,7 +120,7 @@ public class CustomerEnquiryRepository {
 			where_sql_map.put("contactFirstName", contactFirstName_map);
 			//phone
 			HashMap<String, Object> phone_map = new HashMap<>();
-			phone_map.put("flag", isPhoneExist);
+			phone_map.put("flag", StringUtils.isEmpty(request.getPhone()) ? true : false);
 			phone_map.put("column", "`phone`");
 			phone_map.put("condition", " LIKE :phone ");
 			phone_map.put("param", "phone");
@@ -174,7 +128,7 @@ public class CustomerEnquiryRepository {
 			where_sql_map.put("phone", phone_map);
 			//city
 			HashMap<String, Object> city_map = new HashMap<>();
-			city_map.put("flag", isCityExist);
+			city_map.put("flag", StringUtils.isEmpty(request.getCity()) ? true : false);
 			city_map.put("column", "`city`");
 			city_map.put("condition", " LIKE :city ");
 			city_map.put("param", "city");
@@ -182,17 +136,21 @@ public class CustomerEnquiryRepository {
 			where_sql_map.put("city", city_map);
 			//country
 			HashMap<String, Object> country_map = new HashMap<>();
-			country_map.put("flag", isCountryExist);
+			country_map.put("flag", StringUtils.isEmpty(request.getCountry()) ? true : false);
 			country_map.put("column", "`country`");
 			country_map.put("condition", " LIKE :country ");
 			country_map.put("param", "country");
 			country_map.put("value", request.getCountry());
 			where_sql_map.put("country", country_map);
 			
+			boolean isNullParam = true;
+			
 			for(String key : where_sql_map.keySet()) {
 				HashMap<String, Object> key_map = where_sql_map.get(key);
 				
 				if((boolean)key_map.get("flag")) {
+					isNullParam = false;
+					
 					if(isFirstCondition) {
 						where_sql.append("WHERE ");
 						isFirstCondition = false;
@@ -200,24 +158,24 @@ public class CustomerEnquiryRepository {
 						where_sql.append("AND ");
 					}
 					where_sql.append((String)key_map.get("column") + (String)key_map.get("condition"));
-					
-				}
-				
-			}
-			select_from_sql.append(where_sql);
-			Query query = entityManager.createNativeQuery(select_from_sql.toString(),CustomerDetailsVO.class);
-			
-			for(String key : where_sql_map.keySet()) {
-				HashMap<String, Object> key_map = where_sql_map.get(key);
-				
-				if((boolean)key_map.get("flag")) {
-					query.setParameter((String)key_map.get("param"), "%" + (String)key_map.get("value") + "%");
 				}
 			}
 			
-			list = query.getResultList();
-			logger.info("getCustomerDetails count" + list.size());
+			if(!isNullParam) {
+				select_from_sql.append(where_sql);
+				Query query = entityManager.createNativeQuery(select_from_sql.toString(),CustomerDetailsVO.class);
 			
+				for(String key : where_sql_map.keySet()) {
+					HashMap<String, Object> key_map = where_sql_map.get(key);
+				
+					if((boolean)key_map.get("flag")) {
+						query.setParameter((String)key_map.get("param"), "%" + (String)key_map.get("value") + "%");
+					}
+				}
+			
+				list = query.getResultList();
+				logger.info("getCustomerDetails count" + list.size());
+			}
 			
 			
 			
