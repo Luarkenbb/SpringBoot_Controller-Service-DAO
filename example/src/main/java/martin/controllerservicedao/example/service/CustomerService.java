@@ -32,21 +32,7 @@ public class CustomerService {
 		try {
 			CustomerDetailsVO vo = customerEnquiryRepository.getCustomerDetailsByPK(request);
 			if(vo != null) {
-				response = new CustomerDetailsBaseResponse();
-				
-				response.setAddressLine1(vo.getAddressLine1());
-				response.setAddressLine2(vo.getAddressLine2());
-				response.setCity(vo.getCity());
-				response.setContactFirstName(vo.getContactFirstName());
-				response.setContactLastName(vo.getContactLastName());
-				response.setCountry(vo.getCountry());
-				response.setCreditLimit(vo.getCreditLimit());
-				response.setCustomerName(vo.getCustomerName());
-				response.setCustomerNumber(vo.getCustomerNumber());
-				response.setPhone(vo.getPhone());
-				response.setPostalCode(vo.getPostalCode());
-				response.setSalesRepEmployeeNumber(vo.getSalesRepEmployeeNumber());
-				response.setState(vo.getState());
+				response = new CustomerDetailsBaseResponse(vo);
 			}else {
 				response = null;
 			}
@@ -64,27 +50,13 @@ public class CustomerService {
 	public List<CustomerDetailsBaseResponse> getCustomerDetails(CustomerGetDetailsRequest request) throws Exception{
 		logger.info("getCustomerDetails start");
 		List<CustomerDetailsBaseResponse> response_list = new ArrayList<CustomerDetailsBaseResponse>();
-		CustomerDetailsBaseResponse response;
+		
 		try {
 			List<CustomerDetailsVO> vo_list = customerEnquiryRepository.getCustomerDetails(request);
-			if(vo_list != null && vo_list.size() != 0) {
+			if(vo_list != null) {
 				for(CustomerDetailsVO vo : vo_list) {
-					response = new CustomerDetailsBaseResponse();
-					
-					response.setAddressLine1(vo.getAddressLine1());
-					response.setAddressLine2(vo.getAddressLine2());
-					response.setCity(vo.getCity());
-					response.setContactFirstName(vo.getContactFirstName());
-					response.setContactLastName(vo.getContactLastName());
-					response.setCountry(vo.getCountry());
-					response.setCreditLimit(vo.getCreditLimit());
-					response.setCustomerName(vo.getCustomerName());
-					response.setCustomerNumber(vo.getCustomerNumber());
-					response.setPhone(vo.getPhone());
-					response.setPostalCode(vo.getPostalCode());
-					response.setSalesRepEmployeeNumber(vo.getSalesRepEmployeeNumber());
-					response.setState(vo.getState());
-					
+					CustomerDetailsBaseResponse response;
+					response = new CustomerDetailsBaseResponse(vo);
 					response_list.add(response);
 				}
 			}
