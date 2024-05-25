@@ -34,7 +34,7 @@ public class CustomerController {
 		CustomerDetailsBaseResponse response;
 		
 		try {
-			 response = customerService.getCustomerDetailsByPK(request);
+			response = customerService.getCustomerDetailsByPK(request);
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.error(e.getMessage());
