@@ -29,42 +29,28 @@ public class CustomerService {
 		logger.info("getCustomerDetailsByPK start");
 		CustomerDetailsBaseResponse response;
 		
-		try {
-			CustomerDetailsVO vo = customerEnquiryRepository.getCustomerDetailsByPK(request);
-			if(vo != null) {
-				response = new CustomerDetailsBaseResponse(vo);
-			}else {
-				response = null;
-			}
-			
-		}catch (Exception e) {
-			e.printStackTrace();
-			logger.error(e.getMessage());
-			throw e;
+		CustomerDetailsVO vo = customerEnquiryRepository.getCustomerDetailsByPK(request);
+		if(vo != null) {
+			response = new CustomerDetailsBaseResponse(vo);
+		}else {
+			response = null;
 		}
-		
+			
 		logger.info("getCustomerDetailsByPK end");
 		return response;
 	}
 	
 	public List<CustomerDetailsBaseResponse> getCustomerDetails(CustomerGetDetailsRequest request) throws Exception{
 		logger.info("getCustomerDetails start");
-		List<CustomerDetailsBaseResponse> response_list = new ArrayList<CustomerDetailsBaseResponse>();
 		
-		try {
-			List<CustomerDetailsVO> vo_list = customerEnquiryRepository.getCustomerDetails(request);
-			if(vo_list != null) {
-				for(CustomerDetailsVO vo : vo_list) {
-					CustomerDetailsBaseResponse response;
-					response = new CustomerDetailsBaseResponse(vo);
-					response_list.add(response);
-				}
+		List<CustomerDetailsBaseResponse> response_list = new ArrayList<CustomerDetailsBaseResponse>();
+		List<CustomerDetailsVO> vo_list = customerEnquiryRepository.getCustomerDetails(request);
+		if(vo_list != null) {
+			for(CustomerDetailsVO vo : vo_list) {
+				CustomerDetailsBaseResponse response;
+				response = new CustomerDetailsBaseResponse(vo);
+				response_list.add(response);
 			}
-			
-		}catch (Exception e) {
-			e.printStackTrace();
-			logger.error(e.getMessage());
-			throw e;
 		}
 		
 		logger.info("getCustomerDetails end");
