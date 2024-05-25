@@ -47,8 +47,7 @@ public class CustomerService {
 		List<CustomerDetailsVO> vo_list = customerEnquiryRepository.getCustomerDetails(request);
 		if(vo_list != null) {
 			for(CustomerDetailsVO vo : vo_list) {
-				CustomerDetailsBaseResponse response;
-				response = new CustomerDetailsBaseResponse(vo);
+				CustomerDetailsBaseResponse response = new CustomerDetailsBaseResponse(vo);
 				response_list.add(response);
 			}
 		}

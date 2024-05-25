@@ -14,6 +14,7 @@ public class ResponseUtils {
 	private static final String DATA = "data";
 	private static final String MESSAGE = "msg";
 	private static final String MESSAGE_OK = "ok";
+	private static final String COUNT = "count";
 	
 	public static <T> ResponseEntity<Map<String, Object>> successSingleResult(Object obj){
 		Map<String, Object> responseBody = new HashMap<>();
@@ -26,9 +27,12 @@ public class ResponseUtils {
 	public static <T> ResponseEntity<Map<String, Object>> successListResult(List list){
 		Map<String, Object> responseBody = new HashMap<>();
 		responseBody.put(STATUS, Map.of(CODE, 0, MESSAGE, MESSAGE_OK));
+		
 		if(list != null && list.size() != 0) {
+			responseBody.put(COUNT, list.size());
 			responseBody.put(PAYLOAD, Map.of(DATA, list));
 		}else {
+			responseBody.put(COUNT, 0);
 			responseBody.put(PAYLOAD, Map.of(DATA, "nodata"));
 		}
 		

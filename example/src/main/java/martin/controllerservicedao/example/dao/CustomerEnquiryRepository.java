@@ -3,6 +3,7 @@ package martin.controllerservicedao.example.dao;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -93,9 +94,10 @@ public class CustomerEnquiryRepository {
 			boolean isFirstCondition = true;
 			StringBuffer where_sql = new StringBuffer("");
 			
-			HashMap<String, HashMap<String, Object>> where_sql_map = new HashMap<>();
+			Map<String, Map<String, Object>> where_sql_map = new HashMap<String, Map<String, Object>>();
+			
 			//CustomerName
-			HashMap<String, Object> customerName_map = new HashMap<>();
+			Map<String, Object> customerName_map = new HashMap<String, Object>();
 			customerName_map.put("flag", StringUtils.isEmpty(request.getCustomerName()) ? false : true );
 			customerName_map.put("column", "`customerName`");
 			customerName_map.put("condition", " LIKE :customer_name ");
@@ -103,7 +105,7 @@ public class CustomerEnquiryRepository {
 			customerName_map.put("value", request.getCustomerName());
 			where_sql_map.put("customerName", customerName_map);
 			//contactLastName
-			HashMap<String, Object> contactLastName_map = new HashMap<>();
+			Map<String, Object> contactLastName_map = new HashMap<String, Object>();
 			contactLastName_map.put("flag", StringUtils.isEmpty(request.getContactLastName()) ? false : true );
 			contactLastName_map.put("column", "`contactLastName`");
 			contactLastName_map.put("condition", " LIKE :contact_last_name ");
@@ -111,7 +113,7 @@ public class CustomerEnquiryRepository {
 			contactLastName_map.put("value", request.getContactLastName());
 			where_sql_map.put("contactLastName", contactLastName_map);
 			//contactFirstName
-			HashMap<String, Object> contactFirstName_map = new HashMap<>();
+			Map<String, Object> contactFirstName_map = new HashMap<String, Object>();
 			contactFirstName_map.put("flag", StringUtils.isEmpty(request.getContactFirstName()) ? false : true );
 			contactFirstName_map.put("column", "`contactFirstName`");
 			contactFirstName_map.put("condition", " LIKE :contact_first_name ");
@@ -119,7 +121,7 @@ public class CustomerEnquiryRepository {
 			contactFirstName_map.put("value", request.getContactFirstName());
 			where_sql_map.put("contactFirstName", contactFirstName_map);
 			//phone
-			HashMap<String, Object> phone_map = new HashMap<>();
+			Map<String, Object> phone_map = new HashMap<String, Object>();
 			phone_map.put("flag", StringUtils.isEmpty(request.getPhone()) ? false : true );
 			phone_map.put("column", "`phone`");
 			phone_map.put("condition", " LIKE :phone ");
@@ -127,7 +129,7 @@ public class CustomerEnquiryRepository {
 			phone_map.put("value", request.getPhone());
 			where_sql_map.put("phone", phone_map);
 			//city
-			HashMap<String, Object> city_map = new HashMap<>();
+			Map<String, Object> city_map = new HashMap<String, Object>();
 			city_map.put("flag", StringUtils.isEmpty(request.getCity()) ? false : true );
 			city_map.put("column", "`city`");
 			city_map.put("condition", " LIKE :city ");
@@ -135,7 +137,7 @@ public class CustomerEnquiryRepository {
 			city_map.put("value", request.getCity());
 			where_sql_map.put("city", city_map);
 			//country
-			HashMap<String, Object> country_map = new HashMap<>();
+			Map<String, Object> country_map = new HashMap<String, Object>();
 			country_map.put("flag", StringUtils.isEmpty(request.getCountry()) ? false : true );
 			country_map.put("column", "`country`");
 			country_map.put("condition", " LIKE :country ");
@@ -146,7 +148,7 @@ public class CustomerEnquiryRepository {
 			boolean isNullParam = true;
 			
 			for(String key : where_sql_map.keySet()) {
-				HashMap<String, Object> key_map = where_sql_map.get(key);
+				Map<String, Object> key_map = where_sql_map.get(key);
 				
 				if((boolean)key_map.get("flag")) {
 					isNullParam = false;
@@ -166,7 +168,7 @@ public class CustomerEnquiryRepository {
 				Query query = entityManager.createNativeQuery(select_from_sql.toString(),CustomerDetailsVO.class);
 			
 				for(String key : where_sql_map.keySet()) {
-					HashMap<String, Object> key_map = where_sql_map.get(key);
+					Map<String, Object> key_map = where_sql_map.get(key);
 				
 					if((boolean)key_map.get("flag")) {
 						query.setParameter((String)key_map.get("param"), "%" + (String)key_map.get("value") + "%");
