@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import martin.controllerservicedao.example.model.request.EmployeesPKRequest;
+import martin.controllerservicedao.example.model.request.OfficesPKRequest;
 import martin.controllerservicedao.example.service.EmployeesService;
 import martin.controllerservicedao.example.utils.ResponseUtils;
 
@@ -29,4 +30,9 @@ public class EmployeesController {
 		return ResponseUtils.successSingleResult(employeesService.getEmployeeByPK(request));
 	}
 	
+	@PostMapping("/getEmployeesByOfficeCode")
+	public ResponseEntity<Map<String, Object>> getEmployeesByOfficeCode(@RequestBody OfficesPKRequest request){
+		logger.info("Start");
+		return ResponseUtils.successListResult(employeesService.getEmployeesByOfficeCode(request));
+	}
 }

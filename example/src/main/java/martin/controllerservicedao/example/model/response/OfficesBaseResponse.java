@@ -1,5 +1,7 @@
 package martin.controllerservicedao.example.model.response;
 
+import org.apache.commons.lang3.StringUtils;
+
 import lombok.Data;
 import martin.controllerservicedao.example.model.entity.Offices;
 
@@ -24,8 +26,8 @@ public class OfficesBaseResponse {
 		this.city = entity.getCity();
 		this.phone = entity.getPhone();
 		this.addressLine1 = entity.getAddressLine1();
-		this.addressLine2 = entity.getAddressLine2();
-		this.state = entity.getState();
+		this.addressLine2 = StringUtils.isNotEmpty(entity.getAddressLine2()) ? entity.getAddressLine2() : "";
+		this.state = StringUtils.isNotEmpty(entity.getState()) ? entity.getState() : "";
 		this.country = entity.getCountry();
 		this.postalCode = entity.getPostalCode();
 		this.territory = entity.getTerritory();

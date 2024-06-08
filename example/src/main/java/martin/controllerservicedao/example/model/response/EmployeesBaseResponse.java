@@ -26,7 +26,11 @@ public class EmployeesBaseResponse {
 		this.extension = entity.getExtension();
 		this.email = entity.getEmail();
 		this.officeCode = entity.getOfficeCode().getOfficeCode();
-		this.reportsTo = entity.getReportsTo().getEmployeeNumber();
+		
+		if(entity.getReportsTo() != null) {
+			this.reportsTo = entity.getReportsTo().getEmployeeNumber();
+		}
+		
 		this.jobTitle = entity.getJobTitle();
 	}
 }
