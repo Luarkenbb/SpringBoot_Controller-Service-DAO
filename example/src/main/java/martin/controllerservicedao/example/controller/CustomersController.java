@@ -14,24 +14,24 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import martin.controllerservicedao.example.model.request.CustomerGetDetailsByPKRequest;
-import martin.controllerservicedao.example.model.request.CustomerGetDetailsRequest;
-import martin.controllerservicedao.example.model.response.CustomerDetailsBaseResponse;
-import martin.controllerservicedao.example.service.CustomerService;
+import martin.controllerservicedao.example.model.request.CustomersPKRequest;
+import martin.controllerservicedao.example.model.request.CustomersGetDetailsRequest;
+import martin.controllerservicedao.example.model.response.CustomersDetailsBaseResponse;
+import martin.controllerservicedao.example.service.CustomersService;
 import martin.controllerservicedao.example.utils.ResponseUtils;
 
 @RestController
 @RequestMapping("/customer")
-public class CustomerController {
-	private static final Logger logger = LogManager.getLogger(CustomerController.class);
+public class CustomersController {
+	private static final Logger logger = LogManager.getLogger(CustomersController.class);
 	
 	@Autowired
-	private CustomerService customerService;
+	private CustomersService customerService;
 	
 	@PostMapping("/get-customer-details-by-PK")
-	public ResponseEntity<Map<String, Object>> getCustomerDetailsByPK(@RequestBody CustomerGetDetailsByPKRequest request){
+	public ResponseEntity<Map<String, Object>> getCustomerDetailsByPK(@RequestBody CustomersPKRequest request){
 		logger.info("get-customer-details-by-PK start");
-		CustomerDetailsBaseResponse response;
+		CustomersDetailsBaseResponse response;
 		
 		try {
 			response = customerService.getCustomerDetailsByPK(request);
@@ -46,9 +46,9 @@ public class CustomerController {
 	}
 	
 	@PostMapping("/get-customer-details")
-	public ResponseEntity<Map<String, Object>> getCustomerDetails(@RequestBody CustomerGetDetailsRequest request){
+	public ResponseEntity<Map<String, Object>> getCustomerDetails(@RequestBody CustomersGetDetailsRequest request){
 		logger.info("get-customer-details start");
-		List<CustomerDetailsBaseResponse> response;
+		List<CustomersDetailsBaseResponse> response;
 		
 		try {
 			response = customerService.getCustomerDetails(request);

@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 
 import martin.controllerservicedao.example.dao.OfficesRepository;
 import martin.controllerservicedao.example.model.entity.Offices;
-import martin.controllerservicedao.example.model.request.OfficesGetOfficeByPKRequest;
-import martin.controllerservicedao.example.model.response.OfficesDetailsBaseResponse;
+import martin.controllerservicedao.example.model.request.OfficesPKRequest;
+import martin.controllerservicedao.example.model.response.OfficesBaseResponse;
 @Service
 public class OfficesService {
 	private static final Logger logger = LogManager.getLogger(OfficesService.class);
@@ -23,14 +23,14 @@ public class OfficesService {
 		this.officesRepository = officesRepository;
 	}
 	
-	public OfficesDetailsBaseResponse getOfficeByPK(OfficesGetOfficeByPKRequest request){
+	public OfficesBaseResponse getOfficeByPK(OfficesPKRequest request){
 		logger.info("Start");
 		Optional<Offices> office = officesRepository.findById(request.getOfficeCode());
 		if(office.isEmpty()) {
-			return new OfficesDetailsBaseResponse();
+			return new OfficesBaseResponse();
 		}
 		
-		return new OfficesDetailsBaseResponse(office.get());
+		return new OfficesBaseResponse(office.get());
 	}
 	
 }

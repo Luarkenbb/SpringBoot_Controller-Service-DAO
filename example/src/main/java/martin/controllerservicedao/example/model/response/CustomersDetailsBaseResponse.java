@@ -1,10 +1,10 @@
 package martin.controllerservicedao.example.model.response;
 
 import lombok.Data;
-import martin.controllerservicedao.example.model.vo.CustomerDetailsVO;
+import martin.controllerservicedao.example.model.vo.CustomersDetailsVO;
 
 @Data
-public class CustomerDetailsBaseResponse {
+public class CustomersDetailsBaseResponse {
 	private int customerNumber;
 	private String customerName;
 	private String contactLastName;
@@ -19,11 +19,11 @@ public class CustomerDetailsBaseResponse {
 	private String salesRepEmployeeNumber;
 	private double creditLimit;
 	
-	public CustomerDetailsBaseResponse() {
+	public CustomersDetailsBaseResponse() {
 		
 	}
 	
-	public CustomerDetailsBaseResponse(CustomerDetailsVO vo) {
+	public CustomersDetailsBaseResponse(CustomersDetailsVO vo) {
 		this.customerNumber = vo.getCustomerNumber();
 		this.customerName = vo.getCustomerName();
 		this.contactLastName = vo.getContactLastName();

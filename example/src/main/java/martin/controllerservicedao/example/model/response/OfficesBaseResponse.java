@@ -4,7 +4,7 @@ import lombok.Data;
 import martin.controllerservicedao.example.model.entity.Offices;
 
 @Data
-public class OfficesDetailsBaseResponse {
+public class OfficesBaseResponse {
 	private String officeCode;
 	private String city;
 	private String phone;
@@ -15,11 +15,11 @@ public class OfficesDetailsBaseResponse {
 	private String postalCode;
 	private String territory;
 	
-	public OfficesDetailsBaseResponse() {
+	public OfficesBaseResponse() {
 		
 	}
 	
-	public OfficesDetailsBaseResponse(Offices entity) {
+	public OfficesBaseResponse(Offices entity) {
 		this.officeCode = entity.getOfficeCode();
 		this.city = entity.getCity();
 		this.phone = entity.getPhone();

@@ -11,21 +11,22 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import martin.controllerservicedao.example.model.request.OfficesPKRequest;
-import martin.controllerservicedao.example.service.OfficesService;
+import martin.controllerservicedao.example.model.request.EmployeesPKRequest;
+import martin.controllerservicedao.example.service.EmployeesService;
 import martin.controllerservicedao.example.utils.ResponseUtils;
 
 @RestController
-@RequestMapping("/offices")
-public class OfficesController {
-	private static final Logger logger = LogManager.getLogger(OfficesController.class);
+@RequestMapping("/employees")
+public class EmployeesController {
+	private static final Logger logger = LogManager.getLogger(EmployeesController.class);
 	
 	@Autowired
-	private OfficesService officesService;
+	private EmployeesService employeesService;
 	
-	@PostMapping("/getOfficesByPK")
-	public ResponseEntity<Map<String, Object>> getOffice(@RequestBody OfficesPKRequest request){
+	@PostMapping("/getEmployeeByPK")
+	public ResponseEntity<Map<String, Object>> getEmployee(@RequestBody EmployeesPKRequest request){
 		logger.info("Start");
-		return ResponseUtils.successSingleResult(officesService.getOfficeByPK(request));
+		return ResponseUtils.successSingleResult(employeesService.getEmployeeByPK(request));
 	}
+	
 }

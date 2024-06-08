@@ -14,22 +14,22 @@ import org.springframework.stereotype.Repository;
 import io.micrometer.common.util.StringUtils;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
-import martin.controllerservicedao.example.model.request.CustomerGetDetailsByPKRequest;
-import martin.controllerservicedao.example.model.request.CustomerGetDetailsRequest;
-import martin.controllerservicedao.example.model.vo.CustomerDetailsVO;
+import martin.controllerservicedao.example.model.request.CustomersPKRequest;
+import martin.controllerservicedao.example.model.request.CustomersGetDetailsRequest;
+import martin.controllerservicedao.example.model.vo.CustomersDetailsVO;
 
 @Repository
-public class CustomerEnquiryRepository {
-	private static final Logger logger = LogManager.getLogger(CustomerEnquiryRepository.class);
+public class CustomersRepository {
+	private static final Logger logger = LogManager.getLogger(CustomersRepository.class);
 	
 	@Autowired
 	private EntityManager entityManager;
 	
-	public CustomerDetailsVO getCustomerDetailsByPK(CustomerGetDetailsByPKRequest request) {
+	public CustomersDetailsVO getCustomerDetailsByPK(CustomersPKRequest request) {
 		logger.info("getCustomerDetailsByPK start");
-		CustomerDetailsVO vo = new CustomerDetailsVO();
+		CustomersDetailsVO vo = new CustomersDetailsVO();
 		
-		List<CustomerDetailsVO> list = new ArrayList();
+		List<CustomersDetailsVO> list = new ArrayList();
 		try {
 			StringBuffer sql = new StringBuffer("SELECT `customerNumber`,"
 					+ "    `customerName`,"
@@ -46,7 +46,7 @@ public class CustomerEnquiryRepository {
 					+ "    `creditLimit` "
 					+ "FROM `customers` "
 					+ "WHERE `customerNumber` = :number");
-			Query query = entityManager.createNativeQuery(sql.toString(),CustomerDetailsVO.class);
+			Query query = entityManager.createNativeQuery(sql.toString(),CustomersDetailsVO.class);
 			if(request.getCustomerNumber() != 0) { //primitives dont have null value
 				query.setParameter("number", request.getCustomerNumber());
 			}
@@ -67,9 +67,9 @@ public class CustomerEnquiryRepository {
 	}
 	
 	
-	public List<CustomerDetailsVO> getCustomerDetails(CustomerGetDetailsRequest request) {
+	public List<CustomersDetailsVO> getCustomerDetails(CustomersGetDetailsRequest request) {
 		logger.info("getCustomerDetails start");
-		List<CustomerDetailsVO> list = new ArrayList();
+		List<CustomersDetailsVO> list = new ArrayList();
 		try {
 			/*-- Check Searching Criteria --*/
 			
@@ -165,7 +165,7 @@ public class CustomerEnquiryRepository {
 			
 			if(!isNullParam) {
 				select_from_sql.append(where_sql);
-				Query query = entityManager.createNativeQuery(select_from_sql.toString(),CustomerDetailsVO.class);
+				Query query = entityManager.createNativeQuery(select_from_sql.toString(),CustomersDetailsVO.class);
 			
 				for(String key : where_sql_map.keySet()) {
 					Map<String, Object> key_map = where_sql_map.get(key);

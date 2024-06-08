@@ -3,7 +3,7 @@ package martin.controllerservicedao.example.model.request;
 import lombok.Data;
 
 @Data
-public class CustomerGetDetailsRequest {
+public class CustomersGetDetailsRequest {
 	private String customerName;
 	private String contactLastName;
 	private String contactFirstName;
