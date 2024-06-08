@@ -8,11 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import martin.controllerservicedao.example.dao.ProductLinesRepository;
-import martin.controllerservicedao.example.model.entity.Offices;
 import martin.controllerservicedao.example.model.entity.ProductLines;
-import martin.controllerservicedao.example.model.request.OfficesPKRequest;
 import martin.controllerservicedao.example.model.request.ProductLinesPKRequest;
-import martin.controllerservicedao.example.model.response.OfficesBaseResponse;
 import martin.controllerservicedao.example.model.response.ProductLinesBaseResponse;
 
 @Service
