@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -33,10 +35,10 @@ public class Customers {
 	@Column(name = "creditLimit", length = 10, scale = 2)
 	private BigDecimal creditLimit;
 	
-	@Id
 	@Column(name = "customerName", length = 50, nullable = false)
 	private String customerName;
 	
+	@Id
 	@Column(name = "customerNumber", nullable = false)
 	private int customerNumber;
 	
@@ -46,7 +48,8 @@ public class Customers {
 	@Column(name = "postalCode", length = 15)
 	private String postalCode;
 	
-	@Column(name = "salesRepEmployeeNumber")
+	@ManyToOne
+	@JoinColumn(name = "salesRepEmployeeNumber")
 	private Employees salesRepEmployeeNumber;
 	
 	@Column(name = "state", length = 50)

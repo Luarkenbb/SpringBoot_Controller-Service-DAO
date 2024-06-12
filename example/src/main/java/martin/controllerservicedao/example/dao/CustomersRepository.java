@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import martin.controllerservicedao.example.model.entity.Customers;
 
-public interface CustomersRepository extends CrudRepository<Customers, String>{
+public interface CustomersRepository extends CrudRepository<Customers, Integer>{
 
 }
