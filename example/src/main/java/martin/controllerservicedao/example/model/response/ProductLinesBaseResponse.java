@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.sql.Blob;
 import java.sql.SQLException;
 
+import org.apache.commons.lang3.StringUtils;
+
 import lombok.Data;
 import martin.controllerservicedao.example.model.entity.ProductLines;
 
@@ -20,8 +22,8 @@ public class ProductLinesBaseResponse {
 	
 	public ProductLinesBaseResponse(ProductLines entity) throws IOException, SQLException {
 		this.productLine = entity.getProductLine();
-		this.textDescription = entity.getTextDescription();
-		this.htmlDescription = entity.getHtmlDescription();
-		this.image = entity.getImage().getBinaryStream().readAllBytes();
+		this.textDescription = StringUtils.isNotEmpty(entity.getHtmlDescription()) ? entity.getTextDescription() : null;
+		this.htmlDescription = StringUtils.isNotEmpty(entity.getHtmlDescription()) ? entity.getHtmlDescription() : null;
+		this.image = entity.getImage() != null ? entity.getImage().getBinaryStream().readAllBytes() : null;
 	}
 }

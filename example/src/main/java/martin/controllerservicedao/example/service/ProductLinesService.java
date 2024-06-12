@@ -26,15 +26,13 @@ public class ProductLinesService {
 	public ProductLinesBaseResponse getProductLinesByPK(ProductLinesPKRequest request){
 		logger.info("Start");
 		Optional<ProductLines> productLine = productLinesRepository.findById(request.getProductLine());
-		if(productLine.isEmpty()) {
-			return new ProductLinesBaseResponse();
-		}
-		
 		try {
-			return new ProductLinesBaseResponse(productLine.get());
+			if(!productLine.isEmpty()) {
+				return new ProductLinesBaseResponse(productLine.get());
+			}
 		}catch(Exception e) {
 			logger.error(e.getMessage());
-			return new ProductLinesBaseResponse();
 		}	
+		return new ProductLinesBaseResponse();
 	}
 }
