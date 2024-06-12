@@ -23,7 +23,7 @@ public class ProductsService {
 		this.productsRepository = productsRepository;
 	}
 	
-	public ProductsBaseResponse getProductLinesByPK(ProductsPKRequest request){
+	public ProductsBaseResponse getProductsByPK(ProductsPKRequest request){
 		logger.info("Start");
 		Optional<Products> product = productsRepository.findById(request.getProductCode());
 		try {

@@ -26,6 +26,6 @@ private static final Logger logger = LogManager.getLogger(ProductsController.cla
 	@PostMapping("/getProductsByPK")
 	public ResponseEntity<Map<String, Object>> getProductLine(@RequestBody ProductsPKRequest request){
 		logger.info("Start");
-		return ResponseUtils.successSingleResult(productsService.getProductLinesByPK(request));
+		return ResponseUtils.successSingleResult(productsService.getProductsByPK(request));
 	}
 }
