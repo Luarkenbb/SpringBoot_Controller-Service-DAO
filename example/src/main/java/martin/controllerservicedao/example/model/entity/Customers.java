@@ -14,6 +14,15 @@ import lombok.Data;
 @Entity
 @Table(name = "Customers")
 public class Customers {
+	public Customers() {
+		
+	}
+	
+	public Customers(int customerNumber) {
+		this.customerNumber = customerNumber;
+	}
+	
+	
 	@Column(name = "addressLine1", length = 50, nullable = false)
 	private String addressLine1;
 	

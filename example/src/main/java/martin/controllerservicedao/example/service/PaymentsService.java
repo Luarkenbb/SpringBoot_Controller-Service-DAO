@@ -35,7 +35,8 @@ private static final Logger logger = LogManager.getLogger(PaymentsService.class)
 		PaymentsKey paymentKey;
 		paymentKey = new PaymentsKey();
 		paymentKey.setCheckNumber(request.getCheckNumber());
-		paymentKey.setCustomerNumber(new Customers());
+		paymentKey.setCustomerNumber(new Customers(request.getCustomerNumber()));
+		
 		
 		Optional<Payments> payments = paymentsRepository.findById(paymentKey);
 		try {
@@ -45,6 +46,7 @@ private static final Logger logger = LogManager.getLogger(PaymentsService.class)
 		}catch(Exception e) {
 			logger.error(e.getMessage());
 		}	
+		
 		return new PaymentsBaseResponse();
 	}
 }
