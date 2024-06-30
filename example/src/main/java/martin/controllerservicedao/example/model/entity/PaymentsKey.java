@@ -7,9 +7,9 @@ import lombok.Data;
 @Embeddable
 @Data
 public class PaymentsKey{
-	@Column(name = "customerNumber")
-	private int customerNumber;
+	@Column(name = "customerNumber", nullable = false)
+	private Customers customerNumber;
 	
-	@Column(name = "checkNumber", length = 50)
+	@Column(name = "checkNumber", length = 50, nullable = false)
 	private String checkNumber;
 }

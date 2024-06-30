@@ -19,9 +19,9 @@ public class Payments {
 	@EmbeddedId
 	private PaymentsKey paymentsKey;
 	
-	@Column(name = "paymentDate")
+	@Column(name = "paymentDate", nullable = false)
 	private Date paymentDate;
 	
-	@Column(name = "amount", length = 10, scale = 2)
+	@Column(name = "amount", length = 10, scale = 2, nullable = false)
 	private BigDecimal amount;
 }

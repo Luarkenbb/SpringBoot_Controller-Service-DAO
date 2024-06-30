@@ -54,5 +54,5 @@ public class Customers {
 	
 	@Column(name = "state", length = 50)
 	private String state;
-	
+
 }

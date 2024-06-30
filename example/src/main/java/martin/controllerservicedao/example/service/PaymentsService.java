@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import martin.controllerservicedao.example.dao.PaymentsRepository;
 import martin.controllerservicedao.example.dao.ProductsRepository;
+import martin.controllerservicedao.example.model.entity.Customers;
 import martin.controllerservicedao.example.model.entity.Payments;
 import martin.controllerservicedao.example.model.entity.PaymentsKey;
 import martin.controllerservicedao.example.model.entity.ProductLines;
@@ -34,7 +35,7 @@ private static final Logger logger = LogManager.getLogger(PaymentsService.class)
 		PaymentsKey paymentKey;
 		paymentKey = new PaymentsKey();
 		paymentKey.setCheckNumber(request.getCheckNumber());
-		paymentKey.setCustomerNumber(request.getCustomerNumber());
+		paymentKey.setCustomerNumber(new Customers());
 		
 		Optional<Payments> payments = paymentsRepository.findById(paymentKey);
 		try {

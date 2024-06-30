@@ -18,7 +18,7 @@ public class PaymentsBaseResponse {
 	}
 	
 	public PaymentsBaseResponse(Payments entity) {
-		this.customerNumber = entity.getPaymentsKey().getCustomerNumber();
+		this.customerNumber = entity.getPaymentsKey().getCustomerNumber().getCustomerNumber();
 		this.checkNumber = entity.getPaymentsKey().getCheckNumber();
 		this.paymentDate = entity.getPaymentDate();
 		this.amount = entity.getAmount();
