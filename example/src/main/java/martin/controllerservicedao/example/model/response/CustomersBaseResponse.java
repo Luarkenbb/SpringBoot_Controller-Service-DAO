@@ -6,7 +6,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import lombok.Data;
 import martin.controllerservicedao.example.model.entity.Customers;
-import martin.controllerservicedao.example.model.entity.Employees;
 
 @Data
 public class CustomersBaseResponse {

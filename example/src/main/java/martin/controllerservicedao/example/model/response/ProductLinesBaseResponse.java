@@ -1,7 +1,6 @@
 package martin.controllerservicedao.example.model.response;
 
 import java.io.IOException;
-import java.sql.Blob;
 import java.sql.SQLException;
 
 import org.apache.commons.lang3.StringUtils;

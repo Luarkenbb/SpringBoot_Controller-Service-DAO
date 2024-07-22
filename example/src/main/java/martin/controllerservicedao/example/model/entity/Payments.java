@@ -1,11 +1,9 @@
 package martin.controllerservicedao.example.model.entity;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Date;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;

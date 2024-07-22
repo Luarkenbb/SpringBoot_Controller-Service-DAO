@@ -9,11 +9,8 @@ import org.springframework.stereotype.Service;
 
 import martin.controllerservicedao.example.dao.CustomersRepository;
 import martin.controllerservicedao.example.model.entity.Customers;
-import martin.controllerservicedao.example.model.entity.Employees;
 import martin.controllerservicedao.example.model.request.CustomersPKRequest;
-import martin.controllerservicedao.example.model.request.EmployeesPKRequest;
 import martin.controllerservicedao.example.model.response.CustomersBaseResponse;
-import martin.controllerservicedao.example.model.response.EmployeesBaseResponse;
 
 @Service
 public class CustomersService {

@@ -8,15 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import martin.controllerservicedao.example.dao.PaymentsRepository;
-import martin.controllerservicedao.example.dao.ProductsRepository;
 import martin.controllerservicedao.example.model.entity.Customers;
 import martin.controllerservicedao.example.model.entity.Payments;
 import martin.controllerservicedao.example.model.entity.PaymentsKey;
-import martin.controllerservicedao.example.model.entity.ProductLines;
 import martin.controllerservicedao.example.model.request.PaymentsPKRequest;
-import martin.controllerservicedao.example.model.request.ProductLinesPKRequest;
 import martin.controllerservicedao.example.model.response.PaymentsBaseResponse;
-import martin.controllerservicedao.example.model.response.ProductLinesBaseResponse;
 
 @Service
 public class PaymentsService {

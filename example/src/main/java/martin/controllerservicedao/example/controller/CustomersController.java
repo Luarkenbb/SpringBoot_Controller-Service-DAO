@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import martin.controllerservicedao.example.model.request.CustomersPKRequest;
-import martin.controllerservicedao.example.model.request.ProductsPKRequest;
 import martin.controllerservicedao.example.service.CustomersService;
 import martin.controllerservicedao.example.utils.ResponseUtils;
 
