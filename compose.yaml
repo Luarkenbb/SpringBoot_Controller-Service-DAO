@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  mysql:
+    build: ./docker_example_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "admin"
+      MYSQL_DATABASE: "classicmodels"
+    ports:
+      - "33306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - my-network
+  springboot:
+    build: ./docker_example_springboot
+    ports:
+      - "8000:8080"
+    depends_on:
+      - mysql
+    networks:
+       - my-network
+volumes:
+  mysql-data:
+
+
+
+networks:
+  my-network:
+    driver: bridge

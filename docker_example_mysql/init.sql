@@ -3,6 +3,10 @@
   Link: http://www.mysqltutorial.org/mysql-sample-database.aspx
 */
 
+/*Create user for springboot app*/
+CREATE USER 'springboot'@'%' IDENTIFIED BY 'admin';
+GRANT ALL PRIVILEGES ON *.* TO 'springboot'@'%' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
 
 /* Create the database */
 CREATE DATABASE  IF NOT EXISTS classicmodels;

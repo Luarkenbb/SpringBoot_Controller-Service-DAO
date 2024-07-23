@@ -10,3 +10,5 @@ Dependencies:
     Spring Web
 
 Swagger url: http://localhost:8080/swagger-ui/index.html
+
+Docker command: docker compose -f compose.yaml up
