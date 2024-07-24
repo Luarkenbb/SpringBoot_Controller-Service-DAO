@@ -9,7 +9,7 @@ GRANT ALL PRIVILEGES ON *.* TO 'springboot'@'%' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 
 /* Create the database */
-CREATE DATABASE  IF NOT EXISTS classicmodels;
+CREATE DATABASE IF NOT EXISTS classicmodels;
 
 /* Switch to the classicmodels database */
 USE classicmodels;
