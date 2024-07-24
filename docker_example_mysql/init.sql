@@ -6,6 +6,9 @@
 /*Create user for springboot app*/
 CREATE USER 'springboot'@'%' IDENTIFIED BY 'admin';
 GRANT ALL PRIVILEGES ON *.* TO 'springboot'@'%' WITH GRANT OPTION;
+
+CREATE USER 'springboot'@'localhost' IDENTIFIED BY 'admin';
+GRANT ALL PRIVILEGES ON *.* TO 'springboot'@'localhost' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 
 /* Create the database */
