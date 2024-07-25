@@ -1,29 +1,27 @@
 # Use an official Maven image as the base image
 FROM maven:3.9.6-eclipse-temurin-21 AS build
 
-# Set the working directory inside the container
-WORKDIR /app
+ENV HOME=/usr/src/app
+RUN mkdir -p $HOME
+WORKDIR $HOME
+ADD ./demo $HOME
 
-# Copy the pom.xml file to the working directory
-COPY ./demo/pom.xml ./demo/pom.xml
+RUN mvn clean package -DskipTests=true
 
-# Download the project dependencies
-RUN mvn dependency:go-offline -B
 
-# Copy the source code to the working directory
-COPY ./demo/src ./demo/src
-
-# Build the Maven project
-RUN mvn package -DskipTests
 
 # Use a lightweight Java image as the base image for the final image
 FROM openjdk:21
+ENV HOME=/usr/src/app
+RUN mkdir -p $HOME
 
-# Copy the built JAR file from the previous stage to the working directory
-COPY --from=build /app/demo/target/*.jar ./target/app.jar
+COPY --from=build $HOME/target/*.jar $HOME/app.jar
+WORKDIR $HOME
+
+ENV SERVER_PORT=8080
+
 
 # Expose the port that the application will listen on
-EXPOSE 8080
+EXPOSE $SERVER_PORT
 
-# Set the command to run the application
-CMD ["java", "-jar", "demo/target/app.jar"]
+ENTRYPOINT [ "java", "-jar", "app.jar" ]
