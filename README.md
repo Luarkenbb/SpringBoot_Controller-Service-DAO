@@ -9,6 +9,6 @@ Dependencies:
     Spring Data JPA
     Spring Web
 
-Swagger url: http://localhost:8080/swagger-ui/index.html
+Swagger url: http://localhost:8000/swagger-ui/index.html
 
 Docker command: docker compose -f compose.yaml up
