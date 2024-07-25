@@ -11,13 +11,13 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "Payments")
+@Table(name = "payments")
 public class Payments { 
 	//composite primary key
 	@EmbeddedId
 	private PaymentsKey paymentsKey;
 	
-	@Column(name = "paymentDate", nullable = false)
+	@Column(name = "payment_date", nullable = false)
 	private Date paymentDate;
 	
 	@Column(name = "amount", length = 10, scale = 2, nullable = false)

@@ -10,16 +10,16 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "Employees")
+@Table(name = "employees")
 public class Employees {
 	@Id
-	@Column(name = "employeeNumber", nullable = false)
+	@Column(name = "employee_number", nullable = false)
 	private int employeeNumber;
 	
-	@Column(name = "lastName", length = 50, nullable = false)
+	@Column(name = "last_name", length = 50, nullable = false)
 	private String lastName;
 	
-	@Column(name = "firstName", length = 50, nullable = false)
+	@Column(name = "first_name", length = 50, nullable = false)
 	private String firstName;
 	
 	@Column(name = "extension", length = 10, nullable = false)
@@ -29,13 +29,13 @@ public class Employees {
 	private String email;
 	
 	@ManyToOne
-	@JoinColumn(name = "officeCode", nullable = false)
+	@JoinColumn(name = "office_code", nullable = false)
 	private Offices officeCode;
 	
 	@ManyToOne
-	@JoinColumn(name = "reportsTo")
+	@JoinColumn(name = "reports_to")
 	private Employees reportsTo;
 	
-	@Column(name = "jobTitle", length = 50, nullable = false)
+	@Column(name = "job_title", length = 50, nullable = false)
 	private String jobTitle;
 }

@@ -12,19 +12,19 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "Orders")
+@Table(name = "orders")
 public class Orders {
 	@Id
-	@Column(name = "orderNumber", nullable = false)
+	@Column(name = "order_number", nullable = false)
 	private int orderNumber;
 	
-	@Column(name = "orderDate", nullable = false)
+	@Column(name = "order_date", nullable = false)
 	private Date orderDate;
 	
-	@Column(name = "requiredDate", nullable = false)
+	@Column(name = "required_date", nullable = false)
 	private Date requiredDate;
 	
-	@Column(name = "shippedDate")
+	@Column(name = "shipped_date")
 	private Date shippedDate;
 	
 	@Column(name = "status", length = 15 ,nullable = false)
@@ -34,6 +34,6 @@ public class Orders {
 	private String comments;
 	
 	@ManyToOne
-	@JoinColumn(name = "customerNumber", nullable = false)
+	@JoinColumn(name = "customer_number", nullable = false)
 	private Customers customerNumber;
 }

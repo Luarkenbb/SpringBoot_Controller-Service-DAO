@@ -10,9 +10,9 @@ import lombok.Data;
 @Data
 public class PaymentsKey{
 	@ManyToOne
-	@JoinColumn(name = "customerNumber", nullable = false)
+	@JoinColumn(name = "customer_number", nullable = false)
 	private Customers customerNumber;
 	
-	@Column(name = "checkNumber", length = 50, nullable = false)
+	@Column(name = "check_number", length = 50, nullable = false)
 	private String checkNumber;
 }

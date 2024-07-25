@@ -10,17 +10,17 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "productLines")
+@Table(name = "productlines")
 public class ProductLines {
 	
 	@Id
-	@Column(name = "productLine", length = 50, nullable = false)
+	@Column(name = "product_line", length = 50, nullable = false)
 	private String productLine;
 	
-	@Column(name = "textDescription", length = 4000)
+	@Column(name = "text_description", length = 4000)
 	private String textDescription;
 	
-	@Column(name = "htmlDescription", columnDefinition = "mediumtext")
+	@Column(name = "html_description", columnDefinition = "mediumtext")
 	private String htmlDescription;
 	
 	@Column(name = "image", columnDefinition = "mediumblob")

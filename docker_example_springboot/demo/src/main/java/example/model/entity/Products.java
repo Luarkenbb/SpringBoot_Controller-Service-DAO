@@ -15,31 +15,31 @@ import lombok.Data;
 @Table(name = "products")
 public class Products {
 	@Id
-	@Column(name = "productCode", length = 15, nullable = false)
+	@Column(name = "product_code", length = 15, nullable = false)
 	private String productCode;
 	
-	@Column(name = "productDescription", nullable = false)
+	@Column(name = "product_description", nullable = false)
 	private String productDescription;
 	
 	@ManyToOne
-	@JoinColumn(name = "productLine")
+	@JoinColumn(name = "product_line")
 	private ProductLines productLine;
 	
-	@Column(name = "productName", length = 70, nullable = false)
+	@Column(name = "product_name", length = 70, nullable = false)
 	private String productName;
 	
-	@Column(name = "productScale", length = 10, nullable = false)
+	@Column(name = "product_scale", length = 10, nullable = false)
 	private String productScale;
 	
-	@Column(name = "productVendor", length = 50, nullable = false)
+	@Column(name = "product_vendor", length = 50, nullable = false)
 	private String productVendor;
 	
-	@Column(name = "buyPrice", length = 10, scale = 2, nullable = false)
+	@Column(name = "buy_price", length = 10, scale = 2, nullable = false)
 	private BigDecimal buyPrice; 
 	
 	@Column(name = "MSRP", length = 10, scale = 2, nullable = false)
 	private BigDecimal MSRP; 
 	
-	@Column(name = "quantityInStock", nullable = false)
+	@Column(name = "quantity_in_stock", nullable = false)
 	private short quantityInStock;
 }	
