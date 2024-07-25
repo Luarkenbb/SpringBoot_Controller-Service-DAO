@@ -1,6 +1,7 @@
 version: '3.8'
 services:
   mysql:
+    container_name: mysql_container
     build: ./docker_example_mysql
     environment:
       MYSQL_ROOT_PASSWORD: "admin"
@@ -12,6 +13,7 @@ services:
     networks:
       - my-network
   springboot:
+    container_name: springboot_container
     build: ./docker_example_springboot
     ports:
       - "8000:8080"
@@ -19,10 +21,13 @@ services:
       - mysql
     networks:
        - my-network
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql_container:3306/classicmodels?useSSL=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: springboot
+      SPRING_DATASOURCE_PASSWORD: admin
+
 volumes:
   mysql-data:
-
-
 
 networks:
   my-network:

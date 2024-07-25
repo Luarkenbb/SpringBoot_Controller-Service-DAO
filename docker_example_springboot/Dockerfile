@@ -15,6 +15,9 @@ FROM openjdk:21
 ENV HOME=/usr/src/app
 RUN mkdir -p $HOME
 
+# install ping
+#RUN apt update && apt install -y iputils-ping
+
 COPY --from=build $HOME/target/*.jar $HOME/app.jar
 WORKDIR $HOME
 
