@@ -21,7 +21,7 @@ public class ProductLinesBaseResponse {
 	
 	public ProductLinesBaseResponse(ProductLines entity) throws IOException, SQLException {
 		this.productLine = entity.getProductLine();
-		this.textDescription = StringUtils.isNotEmpty(entity.getHtmlDescription()) ? entity.getTextDescription() : null;
+		this.textDescription = StringUtils.isNotEmpty(entity.getTextDescription()) ? entity.getTextDescription() : null;
 		this.htmlDescription = StringUtils.isNotEmpty(entity.getHtmlDescription()) ? entity.getHtmlDescription() : null;
 		this.image = entity.getImage() != null ? entity.getImage().getBinaryStream().readAllBytes() : null;
 	}
