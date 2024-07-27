@@ -2,7 +2,7 @@
     "realm": "backend",
     "enabled": true,
     "users": [
-        {
+        {   
             "username": "springboot",
             "enabled": true,
             "credentials": [
@@ -11,7 +11,8 @@
                     "value": "admin",
                     "temporary": false
                 }
-            ]
+            ],
+            "realmRoles": ["admin"]
         }
     ],
     "roles": {

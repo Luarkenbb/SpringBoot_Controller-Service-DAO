@@ -26,6 +26,19 @@ Swagger url: http://localhost:8000/swagger-ui/index.html
         internal:3306
         external:33306
 
-## keycloak (pending)
+## keycloak
+    access http://localhost:4000 and login with admin:admin
+
+    Realm:backend
+        roles:admin
+            springboot:admin 
+
+    ports:
+        internal:4000
+        external:4000
+
+    protected for:
+        springboot (pending)
+
 # docker command
 Docker command: docker compose -f compose.yaml up --build
