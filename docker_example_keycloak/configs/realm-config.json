@@ -3,12 +3,12 @@
     "enabled": true,
     "users": [
         {
-            "username": "admin",
+            "username": "springboot",
             "enabled": true,
             "credentials": [
                 {
                     "type": "password",
-                    "value": "admin_password",
+                    "value": "admin",
                     "temporary": false
                 }
             ]

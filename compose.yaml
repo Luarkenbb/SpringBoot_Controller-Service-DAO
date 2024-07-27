@@ -19,12 +19,17 @@ services:
       - "8000:8080"
     depends_on:
       - mysql
+      - keycloak
     networks:
        - my-network
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql_container:3306/classicmodels?useSSL=false&allowPublicKeyRetrieval=true
       SPRING_DATASOURCE_USERNAME: springboot
       SPRING_DATASOURCE_PASSWORD: admin
+      KEYCLOAK_REALM: backend
+      KEYCLOAK_AUTH_SERVER_URL: http://keycloak_container:4000/auth
+      KEYCLOAK_RESOURCE: keycloak
+      KEYCLOAK_CREDENTIALS_SECRET: your_client_secret
   
   keycloak:
     container_name: keycloak_container
