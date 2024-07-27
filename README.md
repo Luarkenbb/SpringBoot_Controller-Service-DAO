@@ -1,4 +1,5 @@
 # SpringBoot_Controller-Service-DAO
+This is my private project, developed for self learning purpose
 # Service
 ## Springboot
     Maven Project (Java)
