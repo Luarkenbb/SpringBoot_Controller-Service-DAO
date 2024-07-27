@@ -26,5 +26,6 @@ Swagger url: http://localhost:8000/swagger-ui/index.html
         internal:3306
         external:33306
 
+## keycloak (pending)
 # docker command
 Docker command: docker compose -f compose.yaml up --build
