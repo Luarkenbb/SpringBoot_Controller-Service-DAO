@@ -1,5 +1,9 @@
 # SpringBoot_Controller-Service-DAO
 This is my private project, developed for self learning purpose
+Feel free to leave me comments on discussion board. :)
+( current status: try and error with springboot & keycloak)
+( pending to direct user to keycloak login when having no jwt token)
+( pending to build another sql example for stored procedures with springboot)
 # Service
 ## Springboot
     Maven Project (Java)
