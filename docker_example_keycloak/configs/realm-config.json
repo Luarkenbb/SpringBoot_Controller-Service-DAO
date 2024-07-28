@@ -12,7 +12,7 @@
                     "temporary": false
                 }
             ],
-            "realmRoles": ["admin" ,"user"]
+            "realmRoles": ["admin", "user"]
         }
     ],
     "roles": {

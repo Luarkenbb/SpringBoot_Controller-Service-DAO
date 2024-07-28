@@ -2,8 +2,8 @@
 FROM quay.io/keycloak/keycloak:24.0.2
 
 # Set environment variables
-ENV KEYCLOAK_USER=admin
-ENV KEYCLOAK_PASSWORD=admin
+ENV KEYCLOAK_ADMIN_USER=keycloak
+ENV KEYCLOAK_ADMIN_PASSWORD=admin
 
 # Copy the realm configuration file
 COPY ./configs/realm-config.json /opt/keycloak/data/import/realm-config.json
