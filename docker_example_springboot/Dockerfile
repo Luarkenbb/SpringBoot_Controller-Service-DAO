@@ -27,4 +27,8 @@ ENV SERVER_PORT=8080
 # Expose the port that the application will listen on
 EXPOSE $SERVER_PORT
 
+# Add health check for MySQL using nc (netcat)
+HEALTHCHECK --interval=30s --timeout=10s --start-period=30s --retries=3 \
+  CMD nc -z mysql_host 3306 || exit 1
+
 ENTRYPOINT [ "java", "-jar", "app.jar" ]
