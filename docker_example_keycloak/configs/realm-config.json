@@ -40,7 +40,14 @@
             "enabled": true,
             "redirectUris": ["http://localhost:4000/callback"],
             "webOrigins": ["http://localhost:4000"],
-            "defaultRoles": ["admin"],
+            "defaultRoles": ["admin","user"],
+            "secret": "your_client_secret"
+        },{
+            "clientId": "springboot",
+            "enabled": true,
+            "redirectUris": ["http://localhost:8000/*"],
+            "webOrigins": ["http://localhost:8000"],
+            "defaultRoles": ["admin","user"],
             "secret": "your_client_secret"
         }
     ]
