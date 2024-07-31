@@ -64,14 +64,14 @@ public class SecurityConfig {
 
     private ClientRegistration keycloakClientRegistration() {
         return ClientRegistration.withRegistrationId("admin")
-                .clientId("admin")
+                .clientId("springboot_client")
                 .clientSecret("keycloak")
                 .scope("openid", "profile", "email")
-                .authorizationUri("http://localhost:4000/auth/realms/backend/protocol/openid-connect/auth")
-                .tokenUri("http://localhost:4000/auth/realms/backend/protocol/openid-connect/token")
-                .userInfoUri("http://localhost:4000/auth/realms/backend/protocol/openid-connect/userinfo")
+                .authorizationUri("http://localhost:4000/realms/backend/protocol/openid-connect/auth")
+                .tokenUri("http://localhost:4000/realms/backend/protocol/openid-connect/token")
+                .userInfoUri("http://localhost:4000/realms/backend/protocol/openid-connect/userinfo")
                 .userNameAttributeName("preferred_username")
-                .clientName("admin")
+                .clientName("springboot_client")
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                 .redirectUri("{baseUrl}/login/oauth2/code/{registrationId}")
                 .build();
