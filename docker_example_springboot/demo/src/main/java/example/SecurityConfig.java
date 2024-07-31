@@ -63,9 +63,9 @@ public class SecurityConfig {
     }
 
     private ClientRegistration keycloakClientRegistration() {
-        return ClientRegistration.withRegistrationId("admin")
+        return ClientRegistration.withRegistrationId("springboot_client")
                 .clientId("springboot_client")
-                .clientSecret("keycloak")
+                .clientSecret("admin")
                 .scope("openid", "profile", "email")
                 .authorizationUri("http://localhost:4000/realms/backend/protocol/openid-connect/auth")
                 .tokenUri("http://localhost:4000/realms/backend/protocol/openid-connect/token")
