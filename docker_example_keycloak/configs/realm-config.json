@@ -1,6 +1,9 @@
 {
     "realm": "backend",
     "enabled": true,
+    "requiredCredentials": [
+        "password"
+    ],
     "users": [
         {   
             "username": "springboot",
@@ -63,7 +66,11 @@
             "webOrigins": ["http://localhost:8000"],
             "defaultRoles": ["admin","user"],
             "secret": "your_client_secret",
-            "defaultClientScopes": ["openid", "profile", "email"]
+            "defaultClientScopes": ["openid", "profile", "email"],
+            "authorizationServicesEnabled": true,
+            "authorizationSetting":{
+                
+            }
         }
     ]
 }
