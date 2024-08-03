@@ -66,11 +66,8 @@
             "webOrigins": ["http://localhost:8000"],
             "defaultRoles": ["admin","user"],
             "secret": "your_client_secret",
-            "defaultClientScopes": ["openid", "profile", "email"],
-            "authorizationServicesEnabled": true,
-            "authorizationSetting":{
-                
-            }
+            "defaultClientScopes": ["openid", "profile", "email"]
+            
         }
     ]
 }
