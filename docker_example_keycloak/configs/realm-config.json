@@ -67,7 +67,7 @@
             "defaultRoles": ["admin","user"],
             "secret": "your_client_secret",
             "defaultClientScopes": ["openid", "profile", "email"]
-            
         }
     ]
+    
 }

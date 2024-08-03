@@ -1,12 +1,3 @@
 logging:
   level:
     org.springframework.security: trace
-
-keycloak:
-  realm: backend
-  auth-server-url: http://localhost:4000/auth
-  resource: springboot
-  credentials:
-    secret: your_client_secret
-  ssl-required: external
-  use-resource-role-mappings: true
