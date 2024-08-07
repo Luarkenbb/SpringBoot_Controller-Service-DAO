@@ -64,6 +64,8 @@
             "enabled": true,
             "redirectUris": ["http://localhost:8000/*"],
             "webOrigins": ["http://localhost:8000"],
+            "authorizationServicesEnabled": true,
+            "directAccessGrantsEnabled": true,
             "defaultRoles": ["admin","user"],
             "secret": "your_client_secret",
             "defaultClientScopes": ["openid", "profile", "email"]

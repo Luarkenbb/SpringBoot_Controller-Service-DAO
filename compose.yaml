@@ -29,12 +29,14 @@ services:
       
   keycloak:
     container_name: keycloak_container
-    build: ./docker_example_keycloak
+    build:
+      context: ./docker_example_keycloak
     ports:
       - "4000:4000"
     environment:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: admin
+      PROXY_ADDRESS_FORWARDING: "true"   
     networks:
       - my-network
     depends_on:
