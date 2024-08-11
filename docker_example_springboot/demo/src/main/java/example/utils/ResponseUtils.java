@@ -28,7 +28,7 @@ public class ResponseUtils {
 		Map<String, Object> responseBody = new HashMap<>();
 		responseBody.put(STATUS, Map.of(CODE, 0, MESSAGE, MESSAGE_OK));
 		
-		if(list != null && list.size() != 0) {
+		if(list != null && !list.isEmpty()) {
 			responseBody.put(COUNT, list.size());
 			responseBody.put(PAYLOAD, Map.of(DATA, list));
 		}else {
