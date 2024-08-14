@@ -2,7 +2,6 @@ package example;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import static org.springframework.security.config.Customizer.withDefaults;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -17,14 +16,15 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .csrf().disable()// Disable CSRF protection for testing purposes
-            .authorizeHttpRequests(authorizeRequests ->
-                authorizeRequests
-                    .requestMatchers("/admin/**").hasRole("admin")
-                    .requestMatchers("/user/**").hasRole("user")
-                    .anyRequest().authenticated()
+            .csrf(csrfConfigurer -> 
+                csrfConfigurer.disable()// Disable CSRF protection for testing purposes
             )
-            .oauth2Login(withDefaults())
+            .authorizeHttpRequests(authorizeRequests ->
+                authorizeRequests.anyRequest().authenticated()
+            )
+            .oauth2Login(oAuth2LoginConfigurer -> 
+                oAuth2LoginConfigurer.loginPage("/oauth2/authorization/keycloak")
+            )
             .oauth2ResourceServer(oauth2ResourceServer ->
                 oauth2ResourceServer.jwt(jwt ->
                     jwt.decoder(jwtDecoder())

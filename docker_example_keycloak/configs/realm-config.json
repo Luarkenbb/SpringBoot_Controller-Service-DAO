@@ -62,8 +62,8 @@
         },{
             "clientId": "springboot_client",
             "enabled": true,
-            "redirectUris": ["http://localhost:8000/*"],
-            "webOrigins": ["http://localhost:8000"],
+            "redirectUris": ["http://localhost:8000/*", "http://localhost:8080/*"],
+            "webOrigins": ["http://localhost:8000", "http://localhost:8080"],
             "authorizationServicesEnabled": true,
             "directAccessGrantsEnabled": true,
             "defaultRoles": ["admin","user"],
