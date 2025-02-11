@@ -1,0 +1,60 @@
+version: '3.8'
+services:
+  mysql:
+    container_name: mysql_container
+    build: ./docker_example_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "admin"
+      MYSQL_DATABASE: "classicmodels"
+    ports:
+      - "33306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - my-network
+  springboot:
+    container_name: springboot_container
+    build: ./docker_example_springboot
+    ports:
+      - "8000:8080"
+    depends_on:
+      - mysql
+    networks:
+       - my-network
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql_container:3306/classicmodels?useSSL=false&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: springboot
+      SPRING_DATASOURCE_PASSWORD: admin
+      KEYCLOAK_AUTH_SERVER_URL: http://keycloak:4000/auth
+      KEYCLOAK_REALM: martin-realm
+      KEYCLOAK_RESOURCE: martin-root
+      KEYCLOAK_CREDENTIALS_SECRET: martin-secret
+
+  keycloak:
+    container_name: keycloak_container
+    build: ./docker_example_keycloak
+    ports:
+      - "4000:4000"
+    networks:
+      - my-network
+    environment:
+      KEYCLOAK_ADMIN: keycloak
+      KEYCLOAK_ADMIN_PASSWORD: admin
+
+  rocketmq:
+    container_name: rocketmq_container
+    build: ./docker_example_rocketMQ
+    ports:
+      - "9876:9876"
+      - "10911:10911"
+      - "10909:10909"
+      - "10912:10912"
+    networks:
+      - my-network
+
+volumes:
+  mysql-data:
+
+networks:
+  my-network:
+    driver: bridge

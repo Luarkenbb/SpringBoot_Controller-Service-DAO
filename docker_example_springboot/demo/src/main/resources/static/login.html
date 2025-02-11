@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="login.css">
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('loginForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+                const username = document.querySelector('input[name="username"]').value;
+                const password = document.querySelector('input[name="password"]').value;
+                const loginData = { username, password };
+
+                fetch('/api/public/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(loginData)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.access_token) {
+                        sessionStorage.setItem('martin_test_access_token', data.access_token);
+                        sessionStorage.setItem('martin_test_refresh_token', data.refresh_token);
+                        window.location.href = '/swagger-ui.html';
+                    } else {
+                        alert('Login failed. Please try again.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred. Please try again.');
+                });
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form id="loginForm">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</body>
+</html>
