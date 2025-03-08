@@ -14,4 +14,7 @@ public interface EmployeesRepository extends CrudRepository<Employees, Integer>{
 
 	@Query("SELECT e FROM Employees e WHERE e.officeCode.officeCode = ?1")
 	List<Employees> findByOfficeCode(String officeCode);
+
+	@Query("SELECT e FROM Employees e WHERE e.reportsTo.employeeNumber = ?1")
+	List<Employees> findByReportsTo(int reportsTo);
 }

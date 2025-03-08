@@ -49,4 +49,20 @@ public class EmployeesService {
 		 }
 		 return response;
 	}
+
+	public List<EmployeesBaseResponse> getEmployeesByReportsTo(EmployeesPKRequest request) {
+		logger.info("Start");
+		List<EmployeesBaseResponse> response = new ArrayList<EmployeesBaseResponse>();
+		List<Employees> employees = employeesRepository.findByReportsTo(request.getEmployeeNumber());
+
+		if(employees == null || employees.isEmpty()){
+			return null;
+		}
+
+		for (Employees employee : employees) {
+			response.add(new EmployeesBaseResponse(employee));
+		}
+
+		return response;
+	}
 }

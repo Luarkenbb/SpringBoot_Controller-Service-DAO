@@ -19,7 +19,7 @@ import example.service.EmployeesService;
 import example.utils.ResponseUtils;
 
 @RestController
-@RequestMapping("${keycloak.protectedUrl}/employees")
+@RequestMapping("${keycloak.publicUrl}/employees")
 public class EmployeesController {
 	private static final Logger logger = LogManager.getLogger(EmployeesController.class);
 	
@@ -40,5 +40,13 @@ public class EmployeesController {
 	public ResponseEntity<Map<String, Object>> getEmployeesByOfficeCode(@RequestBody OfficesPKRequest request){
 		logger.info("Start");
 		return ResponseUtils.successListResult(employeesService.getEmployeesByOfficeCode(request));
+	}
+
+	@Syslog
+	@RequestValidation
+	@PostMapping("/getEmployeesByReportsTo")
+	public ResponseEntity<Map<String, Object>> getEmployeesByReportsTo(@RequestBody EmployeesPKRequest request){
+		logger.info("Start");
+		return ResponseUtils.successListResult(employeesService.getEmployeesByReportsTo(request));
 	}
 }
